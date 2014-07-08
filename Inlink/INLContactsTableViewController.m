@@ -73,13 +73,13 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    //PFUser *currentUser = [PFUser currentUser];
-    //if (currentUser) {
-    //    self.friends = currentUser[@"friends"];
-    //} else {
-        //INLloginViewController *login = [[INLloginViewController alloc] init];
-        //[self.navigationController presentViewController:login animated:YES completion:nil];
-    //}
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        self.friends = currentUser[@"friends"];
+    } else {
+        INLloginViewController *login = [[INLloginViewController alloc] init];
+        [self.navigationController presentViewController:login animated:YES completion:nil];
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -101,7 +101,7 @@
 #warning Incomplete method implementation.
     //TODO: get number of contacts of the current user
     // Return the number of rows in the section.
-    return 5;
+    return [self.friends count];
 }
 
 
@@ -110,13 +110,13 @@
     INLContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"INLContactsTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    if (indexPath.row > 3) {
-        cell.LinkLabel.hidden = YES;
-        cell.nameLabel.text = @"Jane Doe";
-        
-    } else {
-        cell.nameLabel.text = @"John Doe";
-    }
+//    if (indexPath.row > 3) {
+//        cell.LinkLabel.hidden = YES;
+//        cell.nameLabel.text = @"Jane Doe";
+//        
+//    } else {
+//        cell.nameLabel.text = @"John Doe";
+//    }
 //    switch (indexPath.row) {
 //        case 0:
 //            cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:1.0];
@@ -138,6 +138,8 @@
 //        default:
 //            break;
 //    }
+    PFUser *friend = (PFUser *)self.friends[indexPath.row];
+    cell.nameLabel.text = friend.username;
     return cell;
 }
 

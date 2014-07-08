@@ -43,7 +43,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSMutableDictionary *message = _user[@"messagesSent"];
-    NSString *mess = message[_chatPartner[@"name"]];
+    NSString *mess = message[_chatPartner[@"username"]];
     //animations for when a message disappears
     self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x - self.view.bounds.size.width/4, -100, self.view.bounds.size.width, 50)];
     [self.view addSubview:self.message];
@@ -154,7 +154,7 @@
     _user[@"messageSent"] = messages;
     [_user saveInBackground];
     NSMutableDictionary *mes = self.chatPartner[@"messagesRec"];
-    mes[_user[@"name"]] = message;
+    mes[_user[@"username"]] = message;
     [self.chatPartner saveInBackground];
     self.textField.text = @"";
 }

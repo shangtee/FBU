@@ -11,6 +11,7 @@
 
 @interface INLAcceptFriendshipTableViewController ()
 
+
 @end
 
 @implementation INLAcceptFriendshipTableViewController

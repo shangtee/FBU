@@ -13,6 +13,7 @@
 
 @interface INLAFTableViewCell : UITableViewCell
 @property id <INLAFProtocol> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *DisplayedName;
 
 @end
 

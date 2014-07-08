@@ -34,7 +34,7 @@
                 <color key="backgroundColor" red="0.45635747959697581" green="1" blue="0.76097000672301607" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
             <connections>
-                <outlet property="DisplayedName" destination="j3h-IW-FHX" id="vT9-Ij-7o4"/>
+                <outlet property="DisplayedName" destination="j3h-IW-FHX" id="B1h-bB-aS9"/>
                 <outlet property="addFriends" destination="MpU-xJ-i56" id="k88-lc-119"/>
                 <outlet property="friends" destination="MpU-xJ-i56" id="aKX-5O-oYD"/>
             </connections>

@@ -39,7 +39,7 @@
 
 
 -(IBAction)search:(id)sender{
-    PFQuery *query = [PFQuery queryWithClassName:@"Users"];
+    PFQuery *query = [PFUser query];
     NSString *currentString = self.textF.text;
     if (currentString){
         [query whereKey:@"name" equalTo:currentString];

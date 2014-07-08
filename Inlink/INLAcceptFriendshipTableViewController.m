@@ -8,10 +8,12 @@
 
 #import "INLAcceptFriendshipTableViewController.h"
 #import "INLAFTableViewCell.h"
+#import "Parse/Parse.h"
 
 @interface INLAcceptFriendshipTableViewController ()<INLAFProtocol>
 
 @property NSMutableArray *friendsRequest;
+@property PFUser *user;
 
 
 @end
@@ -23,6 +25,9 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        PFQuery *query = [PFUser query];
+        _user = [PFUser currentUser];
+        _friendsRequest = _user[@"friendsRequestsR"];
     }
     return self;
 }
@@ -65,19 +70,18 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [_friendsRequest count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    INLAFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"INLATableViewCell" forIndexPath:indexPath];
+    PFUser *user = _friendsRequest[indexPath.row];
+    NSString *name = user[@"name"];
+    cell.DisplayedName.text = name;
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

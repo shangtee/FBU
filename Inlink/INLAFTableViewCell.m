@@ -11,8 +11,6 @@
 
 @interface INLAFTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UILabel *DisplayedName;
-
 @property (weak, nonatomic) IBOutlet UIButton *friends;
 
 @end
@@ -25,7 +23,7 @@
 }
 
 - (IBAction)addedFriend:(id)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"Users"];
+    PFQuery *query = [PFUser query];
     PFUser *currentUser = [PFUser currentUser];
     NSString *userRe = self.DisplayedName.text;
     if (userRe){

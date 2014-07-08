@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol INLAFProtocol;
+
 @interface INLAFTableViewCell : UITableViewCell
+@property id <INLAFProtocol> delegate;
+
+@end
+
+
+@protocol INLAFProtocol <NSObject>
+
+-(void)reload;
 
 @end

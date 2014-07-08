@@ -9,7 +9,9 @@
 #import "INLAcceptFriendshipTableViewController.h"
 #import "INLAFTableViewCell.h"
 
-@interface INLAcceptFriendshipTableViewController ()
+@interface INLAcceptFriendshipTableViewController ()<INLAFProtocol>
+
+@property NSMutableArray *friendsRequest;
 
 
 @end
@@ -23,6 +25,10 @@
         // Custom initialization
     }
     return self;
+}
+
+-(void)reload{
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad

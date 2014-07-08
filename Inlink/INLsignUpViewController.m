@@ -12,8 +12,10 @@
 
 
 @interface INLsignUpViewController ()
+
 @property (assign, nonatomic) NSString *inputUser;
 @property (assign, nonatomic) NSString *inputPassword;
+
 @end
 
 @implementation INLsignUpViewController

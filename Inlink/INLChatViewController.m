@@ -49,7 +49,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
+//animations for when a message disappears
 
 //Animations to move up/down view when keyboard appears/disappears
 -(void)moveUp:(NSNotification *)aNotification

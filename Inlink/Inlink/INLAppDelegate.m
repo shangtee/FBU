@@ -33,14 +33,16 @@
 
     INLChatViewController *cvc = [[INLChatViewController alloc] init];
 
+    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
+    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
     
     self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     
-    //Set root view controller to log in screen
-    //INLsignUpViewController *lvc = [[INLsignUpViewController alloc]init];
-    //self.window.rootViewController = lvc;
+//    Set root view controller to log in screen
+//    INLsignUpViewController *lvc = [[INLsignUpViewController alloc]init];
+//    self.window.rootViewController = lvc;
     
     [self.window makeKeyAndVisible];
 

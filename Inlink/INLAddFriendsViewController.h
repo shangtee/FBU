@@ -10,6 +10,4 @@
 
 @interface INLAddFriendsViewController : UIViewController
 
--(instancetype)initWithUserName:(NSString *)userName;
-
 @end

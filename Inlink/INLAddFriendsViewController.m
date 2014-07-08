@@ -26,7 +26,7 @@
         _sear.layer.cornerRadius = 2;
         _sear.layer.borderColor = [UIColor blueColor].CGColor;
     }
-    return self';'
+    return self;
 }
 
 

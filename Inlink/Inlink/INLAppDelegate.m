@@ -28,11 +28,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
+    INLsignUpViewController *signup = [[INLsignUpViewController alloc]init];
     INLloginViewController *login = [[INLloginViewController alloc]init];
     INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
 
     INLChatViewController *cvc = [[INLChatViewController alloc] init];
 
+<<<<<<< HEAD
 //    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
@@ -40,12 +42,19 @@
     
     
     
+=======
+    //Is the user cached?
+    PFUser *currentUser = [PFUser currentUser];
+    UINavigationController *nav;
+    if(currentUser){ //If so, skip to first page
+        nav = [[UINavigationController alloc] initWithRootViewController:cvc];
+    }
+    else{
+        nav = [[UINavigationController alloc] initWithRootViewController:login];
+    }
+>>>>>>> FETCH_HEAD
     self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
-    
-//    Set root view controller to log in screen
-//    INLsignUpViewController *lvc = [[INLsignUpViewController alloc]init];
-//    self.window.rootViewController = lvc;
     
     [self.window makeKeyAndVisible];
 

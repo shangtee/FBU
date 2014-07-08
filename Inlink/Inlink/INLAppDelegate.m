@@ -7,6 +7,11 @@
 //
 
 #import "INLAppDelegate.h"
+#import "INLloginViewController.h"
+#import "INLContactsTableViewController.h"
+#import "INLAddFriendsViewController.h"
+#import "INLAcceptFriendshipTableViewController.h"
+#import "INLChatViewController.h"
 #import <Parse/Parse.h>
 #import "INLloginViewController.h"
 #import "INLsignUpViewController.h"
@@ -22,6 +27,11 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    INLloginViewController *login = [[INLloginViewController alloc]init];
+    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
+    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
+    self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     
     //Set root view controller to log in screen
@@ -33,6 +43,24 @@
     
     return YES;
 }
+
+
+//For Push Notifications
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

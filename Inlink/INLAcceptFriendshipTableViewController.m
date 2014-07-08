@@ -7,8 +7,10 @@
 //
 
 #import "INLAcceptFriendshipTableViewController.h"
+#import "INLAFTableViewCell.h"
 
 @interface INLAcceptFriendshipTableViewController ()
+
 
 @end
 
@@ -32,6 +34,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UINib *nib = [UINib nibWithNibName:@"INLAFTableViewCell" bundle:nil];
+    
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"INLATableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning

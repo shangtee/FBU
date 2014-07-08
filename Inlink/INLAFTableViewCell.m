@@ -8,11 +8,23 @@
 
 #import "INLAFTableViewCell.h"
 
+@interface INLAFTableViewCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *DisplayedName;
+@property (weak, nonatomic) IBOutlet UIButton *addFriends;
+
+@end
+
 @implementation INLAFTableViewCell
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    [super awakeFromNib];
+}
+- (IBAction)addedFriend:(id)sender {
+    
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -32,6 +32,10 @@
     INLloginViewController *login = [[INLloginViewController alloc]init];
     INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
 
+    INLChatViewController *cvc = [[INLChatViewController alloc] init];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
+    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
     //INLChatViewController *cvc = [[INLChatViewController alloc] init];
 
 

@@ -28,22 +28,16 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-    //INLsignUpViewController *signup = [[INLsignUpViewController alloc]init];
+    //EXTRA DECLARATIONS for no reason Lol
     INLloginViewController *login = [[INLloginViewController alloc]init];
     INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
-
     INLChatViewController *cvc = [[INLChatViewController alloc] init];
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
-    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
-    //INLChatViewController *cvc = [[INLChatViewController alloc] init];
-
-
-    UINavigationController *nav;
-    
-    nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
+    //Navigation
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
 
     self.window.rootViewController = nav;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self.window makeKeyAndVisible];

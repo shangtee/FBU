@@ -73,7 +73,17 @@
 {
     NSLog(@"finished typing %@ to add friends",textField.text);
     [textField resignFirstResponder];
-    
+//    PFUser *user = [PFUser currentUser];
+//    PFQuery *query = [PFUser query];
+//    [query whereKey:@"username" equalTo:textField.text]; // find the user
+//    NSArray *befriend = [query findObjects];
+//    if ([befriend count] == 0) NSLog(@"Error: no such person");
+//    else {
+//        NSMutableArray *friends = [(NSArray *)user[@"friends"] mutableCopy];
+//        [friends addObject:befriend[0]];
+//        user[@"friends"] = friends;
+//        [user saveInBackground];
+    }
     return YES;
 }
 

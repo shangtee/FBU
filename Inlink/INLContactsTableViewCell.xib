@@ -27,7 +27,7 @@
                             <constraint firstAttribute="width" constant="76" id="EAO-pt-bVW"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="1" green="0.90980392156862744" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.17403309040000001" green="0.8548058999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>

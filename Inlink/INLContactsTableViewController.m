@@ -29,17 +29,23 @@
         UINavigationItem *navItem = self.navigationItem;
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewFriend:)];
         
-        //Set this bar button item as the right item in the navigation Item
-        navItem.rightBarButtonItem = bbi;
+        //Set this bar button item as the left item in the navigation Item
+        navItem.leftBarButtonItem = bbi;
         
+        
+        //Make a log out button
+        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style: UIBarButtonItemStylePlain target:self action: @selector(logOut:)];
+
+        navItem.rightBarButtonItem = logout;
 
         self.title = @"Friends";
+        /*
         UIColor *lighterColor = [UIColor colorWithRed:0.278 green:0.858 blue:1 alpha:1];
         UIColor *darkerColor = [UIColor colorWithRed:0.165 green:0.514 blue:0.698 alpha:1];
         CAGradientLayer *gradient = [CAGradientLayer layer];
         gradient.colors = [NSArray arrayWithObjects:(id)lighterColor.CGColor, (id)darkerColor.CGColor, nil];
         gradient.frame = self.view.bounds;
-        [self.view.layer insertSublayer:gradient atIndex:0];
+        [self.view.layer insertSublayer:gradient atIndex:0];*/
 
     }
     return self;
@@ -196,4 +202,13 @@
     INLAddFriendsViewController *afvc = [[INLAddFriendsViewController alloc] init];
     [self.navigationController pushViewController:afvc animated:YES];
 }
+
+-(IBAction)logOut:(id)sender
+{
+    [PFUser logOut];
+    PFUser *currentUser = [PFUser currentUser];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 @end
+

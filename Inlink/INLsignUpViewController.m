@@ -12,19 +12,37 @@
 
 
 @interface INLsignUpViewController ()
-@property (assign, nonatomic) NSString *inputUser;
-@property (assign, nonatomic) NSString *inputPassword;
+@property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UIButton *signUp;
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
+
 @end
 
 @implementation INLsignUpViewController
 
-- (void)loadView
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    NSLog(@"Hi");
-    UIView *signUpView = [[INLsignUpView alloc]init];
-    self.view = signUpView;
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
+- (IBAction)signUp:(id)sender {
+    PFUser *user = [PFUser user];
+    user.username = self.username.text;
+    user.password = self.password.text;
+    
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            NSLog(@"Success! You are %@", user);
+        } else {
+            NSString *errorString = [error userInfo][@"error"];
+            NSLog(@"%@", errorString);
+        }
+    }];}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -41,6 +59,7 @@
 
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -53,19 +72,9 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)signUp{ //Sign a user up
-    PFUser *user = [PFUser user];
-    user.username = self.inputUser;
-    user.password = self.inputPassword;
-    
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if(!error){
-            NSLog(@"Whoo"); //Enter the app
-        } else {
-            NSString *errorString = [error userInfo][@"error"];
-            NSLog(@"%@", errorString);
-        }
-    }];
-}
+//Resign keyboard on outside touch
+
+
+
 
 @end

@@ -9,7 +9,18 @@
 #import "INLsignUpView.h"
 #import "INLSignUpViewController.h"
 
+@interface INLsignUpView ()
+
+@end
+
 @implementation INLsignUpView
+
+
+
+- (void)hello: (id)sender
+{
+    NSLog(@"Hi there I am testing a function");
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -31,16 +42,16 @@
         [self addSubview: password];
         
         UIButton *signup = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [signup addTarget: self
-                   action: @selector(signUp:)
-         forControlEvents: UIControlEventTouchUpInside];
-        
         [signup setTitle:@"Sign Up!" forState:UIControlStateNormal];
+        
         signup.frame = CGRectMake(100, 270, 120, 25);
         [self addSubview: signup];
     }
     return self;
 }
+
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

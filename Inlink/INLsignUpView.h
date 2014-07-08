@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface INLsignUpView : UIView
-
+@property (strong, nonatomic) UIButton *signup;
 @end

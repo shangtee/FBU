@@ -29,7 +29,8 @@
 		130CA2C2196B891200ECD902 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130CA2BB196B891200ECD902 /* Security.framework */; };
 		130CA2C3196B891200ECD902 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130CA2BC196B891200ECD902 /* StoreKit.framework */; };
 		130CA2C4196B891200ECD902 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130CA2BD196B891200ECD902 /* SystemConfiguration.framework */; };
-		8ABDFB74196C545C00B5D688 /* INLsignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABDFB73196C545C00B5D688 /* INLsignUpView.m */; };
+		8A57A80E196C72FA0049FB01 /* INLsignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A57A80D196C72FA0049FB01 /* INLsignUpViewController.xib */; };
+		8A57A813196C8A6B0049FB01 /* InLink.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A57A812196C8A6B0049FB01 /* InLink.png */; };
 		8ABDFB77196C551400B5D688 /* INLloginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABDFB76196C551400B5D688 /* INLloginView.m */; };
 		C365F298196C4BD2002EBC4C /* INLloginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C365F296196C4BD2002EBC4C /* INLloginViewController.m */; };
 		C365F29D196C4C6A002EBC4C /* INLsignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C365F29B196C4C6A002EBC4C /* INLsignUpViewController.m */; };
@@ -82,8 +83,8 @@
 		130CA2BB196B891200ECD902 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		130CA2BC196B891200ECD902 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		130CA2BD196B891200ECD902 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		8ABDFB72196C545C00B5D688 /* INLsignUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INLsignUpView.h; sourceTree = "<group>"; };
-		8ABDFB73196C545C00B5D688 /* INLsignUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INLsignUpView.m; sourceTree = "<group>"; };
+		8A57A80D196C72FA0049FB01 /* INLsignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INLsignUpViewController.xib; sourceTree = "<group>"; };
+		8A57A812196C8A6B0049FB01 /* InLink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InLink.png; sourceTree = "<group>"; };
 		8ABDFB75196C551400B5D688 /* INLloginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INLloginView.h; sourceTree = "<group>"; };
 		8ABDFB76196C551400B5D688 /* INLloginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INLloginView.m; sourceTree = "<group>"; };
 		C365F295196C4BD2002EBC4C /* INLloginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INLloginViewController.h; sourceTree = "<group>"; };
@@ -145,14 +146,14 @@
 		130CA276196B885700ECD902 = {
 			isa = PBXGroup;
 			children = (
+				8A57A80F196C889F0049FB01 /* Images */,
 				C365F295196C4BD2002EBC4C /* INLloginViewController.h */,
 				C365F296196C4BD2002EBC4C /* INLloginViewController.m */,
 				8ABDFB75196C551400B5D688 /* INLloginView.h */,
 				8ABDFB76196C551400B5D688 /* INLloginView.m */,
 				C365F29A196C4C6A002EBC4C /* INLsignUpViewController.h */,
 				C365F29B196C4C6A002EBC4C /* INLsignUpViewController.m */,
-				8ABDFB72196C545C00B5D688 /* INLsignUpView.h */,
-				8ABDFB73196C545C00B5D688 /* INLsignUpView.m */,
+				8A57A80D196C72FA0049FB01 /* INLsignUpViewController.xib */,
 				C365F29F196C4C94002EBC4C /* INLContactsTableViewController.h */,
 				C365F2A0196C4C94002EBC4C /* INLContactsTableViewController.m */,
 				C365F2A2196C4CB5002EBC4C /* INLContactsTableViewCell.h */,
@@ -246,6 +247,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8A57A80F196C889F0049FB01 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8A57A812196C8A6B0049FB01 /* InLink.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,9 +333,11 @@
 			files = (
 				C365F2AB196C4CD0002EBC4C /* INLChatViewController.xib in Resources */,
 				130CA28D196B885700ECD902 /* InfoPlist.strings in Resources */,
+				8A57A813196C8A6B0049FB01 /* InLink.png in Resources */,
 				C365F2B8196C4D60002EBC4C /* INLAFTableViewCell.xib in Resources */,
 				130CA295196B885700ECD902 /* Images.xcassets in Resources */,
 				C365F2B0196C4CEE002EBC4C /* INLAddFriendsViewController.xib in Resources */,
+				8A57A80E196C72FA0049FB01 /* INLsignUpViewController.xib in Resources */,
 				C365F2A6196C4CB5002EBC4C /* INLContactsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,7 +368,6 @@
 				C365F2A1196C4C94002EBC4C /* INLContactsTableViewController.m in Sources */,
 				C365F2B7196C4D60002EBC4C /* INLAFTableViewCell.m in Sources */,
 				C365F2B3196C4D3C002EBC4C /* INLAcceptFriendshipTableViewController.m in Sources */,
-				8ABDFB74196C545C00B5D688 /* INLsignUpView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

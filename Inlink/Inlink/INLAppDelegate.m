@@ -27,7 +27,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    INLloginViewController *login = [[INLloginViewController alloc]init];
+    //INLloginViewController *login = [[INLloginViewController alloc]init];
     //INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
     INLChatViewController *cvc = [[INLChatViewController alloc] init];
     

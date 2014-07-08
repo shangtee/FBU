@@ -67,7 +67,7 @@
                          });
                     }];
     [message removeObjectForKey:mess];
-    _user[@"messageSent"] = message;
+    _user[@"messagesSent"] = message;
     [_user saveInBackground];
 }
 

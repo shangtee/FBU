@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 #import "INLsignUpViewController.h"
 #import "INLsignUpView.h"
+#import "INLContactsTableViewController.h"
 
 
 @interface INLsignUpViewController ()
@@ -41,9 +42,19 @@
         if (!error) {
             NSLog(@"Success! You are %@", user);
             
+            //Initialize mutable arrays for friend lists
             user[@"friendRequests"] = [[NSMutableArray alloc]init];
-            INLsignUpViewController *signUp = [[INLsignUpViewController alloc]init];
-            [self.navigationController pushViewController:signUp animated:YES];
+            user[@"friends"] = [[NSMutableArray alloc]init];
+            
+            //Initialize mutable arrays for messages sent and received
+            user[@"messagesSent"] = [[NSMutableArray alloc]init];
+            user[@"messagesReceived"] = [[NSMutableArray alloc]init];
+            
+            //Name as well since Zhichun used name somewhere...
+            user[@"name"] = self.username.text;
+            
+            INLContactsTableViewController *connect = [[INLContactsTableViewController alloc]init];
+            [self.navigationController pushViewController:connect animated:YES];
             
         } else {
             NSString *errorString = [error userInfo][@"error"];

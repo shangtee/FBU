@@ -34,7 +34,12 @@
         
 
         self.title = @"Friends";
-
+        UIColor *lighterColor = [UIColor colorWithRed:0.278 green:0.858 blue:1 alpha:1];
+        UIColor *darkerColor = [UIColor colorWithRed:0.165 green:0.514 blue:0.698 alpha:1];
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.colors = [NSArray arrayWithObjects:(id)lighterColor.CGColor, (id)darkerColor.CGColor, nil];
+        gradient.frame = self.view.bounds;
+        [self.view.layer insertSublayer:gradient atIndex:0];
 
     }
     return self;

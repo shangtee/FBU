@@ -44,6 +44,7 @@
     else{ //Otherwise get them to log in
         nav = [[UINavigationController alloc] initWithRootViewController:login];
     }
+
     self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     

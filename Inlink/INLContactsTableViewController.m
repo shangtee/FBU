@@ -11,6 +11,7 @@
 #import "INLAddFriendsViewController.h"
 #import "Parse/parse.h"
 #import "INLloginViewController.h"
+#import "INLChatViewController.h"
 
 @interface INLContactsTableViewController ()
 
@@ -98,11 +99,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    INLAddFriendsViewController *advc = [[INLAddFriendsViewController alloc] init];
+    INLChatViewController *cvc = [[INLChatViewController alloc] init];
     
     //TODO: change title to name of friend clicked on
-    advc.title = ((INLContactsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]).nameLabel.text;
-    [self.navigationController pushViewController:advc animated:YES];
+    cvc.title = ((INLContactsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]).nameLabel.text;
+    //cvc.chatPartner = self.friends[indexPath.row];
+    [self.navigationController pushViewController:cvc animated:YES];
 }
 /*
 // Override to support conditional editing of the table view.

@@ -29,6 +29,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(backgroundTouched)];
+    
+    [self.view addGestureRecognizer:tap];
     
 }
 
@@ -93,12 +98,18 @@
     [UIView commitAnimations];
 }
 
+
+
+//Methods dismissing the keyboard
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"finished typing %@",textField.text);
     [textField resignFirstResponder];
     
     return YES;
+}
+- (IBAction)backgroundTouched {
+    [self.view endEditing:YES];
 }
 
 - (IBAction)sendMessage:(id)sender {

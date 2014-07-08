@@ -26,6 +26,9 @@
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="addedFriend:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FSV-Jw-FcD"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" red="0.72259068273502658" green="1" blue="0.77529208912036096" alpha="1" colorSpace="calibratedRGB"/>

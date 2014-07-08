@@ -27,11 +27,8 @@
     // Override point for customization after application launch.
     INLloginViewController *login = [[INLloginViewController alloc]init];
     INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
-<<<<<<< HEAD
     //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
-=======
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
->>>>>>> FETCH_HEAD
     self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

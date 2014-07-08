@@ -19,7 +19,12 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    [super awakeFromNib];
+}
+- (IBAction)addedFriend:(id)sender {
+    
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -27,10 +27,11 @@
                             <constraint firstAttribute="width" constant="76" id="EAO-pt-bVW"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.11083284889337675" green="0.62757321438004832" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="1" green="0.90980392156862744" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="IjM-4x-CLe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="KEu-X5-YAe"/>
                     <constraint firstItem="IjM-4x-CLe" firstAttribute="centerY" secondItem="iU8-60-YTX" secondAttribute="centerY" id="NVX-9z-BEW"/>

@@ -33,9 +33,12 @@
 
     INLChatViewController *cvc = [[INLChatViewController alloc] init];
 
-    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
+//    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
+
+    
+    
     
     self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];

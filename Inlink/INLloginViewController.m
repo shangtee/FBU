@@ -50,8 +50,21 @@
     gradient.frame = self.view.bounds;
     [self.view.layer insertSublayer:gradient atIndex:0];
     
-
+    //Is the user cached?
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser){
+        INLsignUpViewController *signUp = [[INLsignUpViewController alloc]init];
+        [self.navigationController pushViewController:signUp animated:YES];
+    }
+    
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

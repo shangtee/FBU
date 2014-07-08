@@ -13,32 +13,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iU8-60-YTX">
-                        <rect key="frame" x="20" y="15" width="46" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iU8-60-YTX">
+                        <rect key="frame" x="20" y="10" width="109" height="31"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Link!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjM-4x-CLe">
-                        <rect key="frame" x="229" y="15" width="76" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NEW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjM-4x-CLe">
+                        <rect key="frame" x="264" y="15" width="76" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="76" id="EAO-pt-bVW"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.17403309040000001" green="0.8548058999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                <constraints>
-                    <constraint firstItem="IjM-4x-CLe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="KEu-X5-YAe"/>
-                    <constraint firstItem="IjM-4x-CLe" firstAttribute="centerY" secondItem="iU8-60-YTX" secondAttribute="centerY" id="NVX-9z-BEW"/>
-                    <constraint firstAttribute="trailing" secondItem="IjM-4x-CLe" secondAttribute="trailing" constant="15" id="SaX-fQ-SFs"/>
-                    <constraint firstAttribute="bottom" secondItem="IjM-4x-CLe" secondAttribute="bottom" constant="16" id="TMj-NM-okQ"/>
-                    <constraint firstItem="iU8-60-YTX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="yAv-MV-MNm"/>
-                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>

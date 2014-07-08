@@ -40,6 +40,11 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             NSLog(@"Success! You are %@", user);
+            
+            user[@"friendRequests"] = [[NSMutableArray alloc]init];
+            INLsignUpViewController *signUp = [[INLsignUpViewController alloc]init];
+            [self.navigationController pushViewController:signUp animated:YES];
+            
         } else {
             NSString *errorString = [error userInfo][@"error"];
             NSLog(@"%@", errorString);
@@ -83,7 +88,7 @@
 
 }
 - (IBAction)toLogIn:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

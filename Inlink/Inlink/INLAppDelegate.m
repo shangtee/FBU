@@ -34,16 +34,10 @@
 
     //INLChatViewController *cvc = [[INLChatViewController alloc] init];
 
-    //Is the user cached?
-    PFUser *currentUser = [PFUser currentUser];
+
     UINavigationController *nav;
     
-    if(currentUser){ //If so, skip to first page (contacts)
-        nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
-    }
-    else{ //Otherwise get them to log in
-        nav = [[UINavigationController alloc] initWithRootViewController:login];
-    }
+    nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
 
     self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];

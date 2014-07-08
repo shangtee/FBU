@@ -9,6 +9,7 @@
 #import "INLContactsTableViewController.h"
 #import "INLContactsTableViewCell.h"
 #import "INLAddFriendsViewController.h"
+#import "INLloginViewController.h"
 #import "Parse/parse.h"
 #import "INLloginViewController.h"
 #import "INLChatViewController.h"
@@ -205,9 +206,12 @@
 
 -(IBAction)logOut:(id)sender
 {
+    //Tell Parse to log the user out
     [PFUser logOut];
     PFUser *currentUser = [PFUser currentUser];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    INLloginViewController *login = [[INLloginViewController alloc]init];
+    //Return to the log in screen
+    [self.navigationController pushViewController:login animated:YES];
 }
 
 @end

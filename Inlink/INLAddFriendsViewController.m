@@ -45,19 +45,6 @@
         [query whereKey:@"name" equalTo:currentString];
         NSArray* currentStrings = [query findObjects];
         PFUser* currentString = currentStrings[0];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                // The find succeeded.
-                NSLog(@"Successfully retrieved %d scores.", objects.count);
-                // Do something with the found objects
-                for (PFObject *object in objects) {
-                    NSLog(@"%@", object.objectId);
-                }
-            } else {
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
         PFUser *currentUser = [PFUser currentUser];
         if (!currentUser){
             NSLog(@"There is an error");
@@ -65,8 +52,10 @@
         }
         NSMutableArray *friendsRequested = currentUser[@"friendRequests"];
         [friendsRequested addObject:currentString];
+        currentUser[@"friendRequests"] = friendsRequested;
         [currentUser saveInBackground];
         NSMutableArray *friendsReceived = currentString[@"friendsRequestsR"];
+        currentString[@"friendsRequestsR"] = friendsReceived;
         [friendsReceived addObject:currentUser];
         
     }

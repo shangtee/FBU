@@ -7,6 +7,7 @@
 //
 
 #import "INLAFTableViewCell.h"
+#import "Parse/Parse.h"
 
 @interface INLAFTableViewCell()
 
@@ -22,8 +23,23 @@
     [super awakeFromNib];
 }
 - (IBAction)addedFriend:(id)sender {
-    
-    
+    PFQuery *query = [PFQuery queryWithClassName:@"Users"];
+    PFUser *currentUser = [PFUser currentUser];
+    NSString *userRe = self.DisplayedName.text;
+    if (userRe){
+        [query whereKey:@"name" equalTo:userRe];
+        NSArray* currentStrings = [query findObjects];
+        PFUser* addUser = currentStrings[0];
+        NSMutableArray *friendsRequested = currentUser[@"friendRequests"];
+        [friendsRequested removeObject:addUser];
+        currentUser[@"friendRequests"] = friendsRequested;
+        [currentUser saveInBackground];
+        NSMutableArray *friendsReceived = addUser[@"friendsRequestsR"];
+        addUser[@"friendsRequestsR"] = friendsReceived;
+        [friendsReceived removeObject:currentUser];
+        [addUser saveInBackground];
+        
+    }
     
 }
 

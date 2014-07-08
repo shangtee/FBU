@@ -9,8 +9,12 @@
 #import "INLContactsTableViewController.h"
 #import "INLContactsTableViewCell.h"
 #import "INLAddFriendsViewController.h"
+#import "Parse/parse.h"
+#import "INLloginViewController.h"
 
 @interface INLContactsTableViewController ()
+
+@property (nonatomic) NSArray *friends;
 
 @end
 
@@ -39,7 +43,20 @@
     
     [self.tableView registerNib:nib forCellReuseIdentifier:@"INLContactsTableViewCell"];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    //PFUser *currentUser = [PFUser currentUser];
+    //if (currentUser) {
+    //    self.friends = currentUser[@"friends"];
+    //} else {
+        //INLloginViewController *login = [[INLloginViewController alloc] init];
+        //[self.navigationController presentViewController:login animated:YES completion:nil];
+    //}
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

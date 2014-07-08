@@ -28,6 +28,7 @@
     if (self) {
         // Custom initialization
         UINavigationItem *navItem = self.navigationItem;
+
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewFriend:)];
         
         //Set this bar button item as the left item in the navigation Item
@@ -212,6 +213,7 @@
     INLloginViewController *login = [[INLloginViewController alloc]init];
     //Return to the log in screen
     [self.navigationController pushViewController:login animated:YES];
+    NSLog(@"Logged out");
 }
 
 @end

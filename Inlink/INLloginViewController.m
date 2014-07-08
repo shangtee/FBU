@@ -53,8 +53,9 @@
     //Is the user cached?
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser){
-        INLsignUpViewController *signUp = [[INLsignUpViewController alloc]init];
-        [self.navigationController pushViewController:signUp animated:YES];
+        INLContactsTableViewController *contacts = [[INLContactsTableViewController alloc]init];
+        NSLog(@"Skip to contacts page");
+        [self.navigationController pushViewController:contacts animated:YES];
     }
     
 }
@@ -95,6 +96,7 @@
                                             NSLog(@"Successfully logged in!");
                                             INLContactsTableViewController *contactsView = [[INLContactsTableViewController alloc]init];
                                             [self.navigationController pushViewController:contactsView animated:YES];
+                                            NSLog(@"Pushed contactsView");
                                         } else {
                                             NSLog(@"Error logging in: %@", error);
                                             //Try again message somewhere

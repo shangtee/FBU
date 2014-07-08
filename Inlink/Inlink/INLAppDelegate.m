@@ -30,8 +30,6 @@
 
     //EXTRA DECLARATIONS for no reason Lol
     INLloginViewController *login = [[INLloginViewController alloc]init];
-    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
-    INLChatViewController *cvc = [[INLChatViewController alloc] init];
     
     //Navigation
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
@@ -41,6 +39,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self.window makeKeyAndVisible];
+    
+    //Change tint of nav bar
+    [[UINavigationBar appearance] setBarTintColor: [UIColor colorWithRed:0.278 green:0.859 blue:1 alpha:1]];
 
     
     return YES;

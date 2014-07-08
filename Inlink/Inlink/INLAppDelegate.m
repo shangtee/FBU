@@ -34,15 +34,6 @@
 
     INLChatViewController *cvc = [[INLChatViewController alloc] init];
 
-<<<<<<< HEAD
-//    INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
-    
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
-
-    
-    
-    
-=======
     //Is the user cached?
     PFUser *currentUser = [PFUser currentUser];
     UINavigationController *nav;
@@ -52,7 +43,7 @@
     else{
         nav = [[UINavigationController alloc] initWithRootViewController:login];
     }
->>>>>>> FETCH_HEAD
+
     self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     

@@ -163,7 +163,7 @@
 
 -(IBAction)addNewFriend:(id)sender
 {
-    INLAddFriendsViewController *afvc = [[INLAddFriendsViewController alloc] initWithUserName:@"Jane"];
+    INLAddFriendsViewController *afvc = [[INLAddFriendsViewController alloc] init];
     [self.navigationController pushViewController:afvc animated:YES];
 }
 @end

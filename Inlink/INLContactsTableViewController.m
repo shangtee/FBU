@@ -26,6 +26,12 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        UINavigationItem *navItem = self.navigationItem;
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewFriend:)];
+        
+        //Set this bar button item as the right item in the navigation Item
+        navItem.rightBarButtonItem = bbi;
+
     }
     return self;
 }
@@ -155,4 +161,9 @@
 }
 */
 
+-(IBAction)addNewFriend:(id)sender
+{
+    INLAddFriendsViewController *afvc = [[INLAddFriendsViewController alloc] initWithUserName:@"Jane"];
+    [self.navigationController pushViewController:afvc animated:YES];
+}
 @end

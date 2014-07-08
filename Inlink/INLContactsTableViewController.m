@@ -29,8 +29,23 @@
         UINavigationItem *navItem = self.navigationItem;
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewFriend:)];
         
-        //Set this bar button item as the right item in the navigation Item
-        navItem.rightBarButtonItem = bbi;
+        //Set this bar button item as the left item in the navigation Item
+        navItem.leftBarButtonItem = bbi;
+        
+        
+        //Make a log out button
+        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style: UIBarButtonItemStylePlain target:self action: @selector(logOut:)];
+
+        navItem.rightBarButtonItem = logout;
+
+        self.title = @"Friends";
+        /*
+        UIColor *lighterColor = [UIColor colorWithRed:0.278 green:0.858 blue:1 alpha:1];
+        UIColor *darkerColor = [UIColor colorWithRed:0.165 green:0.514 blue:0.698 alpha:1];
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.colors = [NSArray arrayWithObjects:(id)lighterColor.CGColor, (id)darkerColor.CGColor, nil];
+        gradient.frame = self.view.bounds;
+        [self.view.layer insertSublayer:gradient atIndex:0];*/
 
     }
     return self;
@@ -100,6 +115,27 @@
     } else {
         cell.nameLabel.text = @"John Doe";
     }
+//    switch (indexPath.row) {
+//        case 0:
+//            cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:1.0];
+//            break;
+//        case 1:
+//            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:1.0];
+//            break;
+//        case 2:
+//            cell.backgroundColor = [UIColor colorWithRed:0.4 green:1.0 blue:0.4 alpha:1.0];
+//            break;
+//        case 3:
+//            cell.backgroundColor = [UIColor colorWithRed:0.4 green:0.4 blue:1.0 alpha:1.0];
+//            break;
+//        case 4:
+//            cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:1.0 alpha:1.0];
+//            break;
+//
+//            
+//        default:
+//            break;
+//    }
     return cell;
 }
 
@@ -166,4 +202,13 @@
     INLAddFriendsViewController *afvc = [[INLAddFriendsViewController alloc] init];
     [self.navigationController pushViewController:afvc animated:YES];
 }
+
+-(IBAction)logOut:(id)sender
+{
+    [PFUser logOut];
+    PFUser *currentUser = [PFUser currentUser];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 @end
+

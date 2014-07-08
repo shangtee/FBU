@@ -7,24 +7,24 @@
 //
 
 #import "INLloginViewController.h"
+#import "INLsignUpViewController.h"
+#import "INLContactsTableViewController.h"
 #import <QuartzCore/QuartzCore.h> //Image Framework
-#import "INLloginView.h"
+#import <Parse/Parse.h>
 
 @interface INLloginViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UIButton *logIn;
+@property (weak, nonatomic) IBOutlet UIButton *toSignUp;
 
 @end
 
 @implementation INLloginViewController
 
 
-- (void)loadView
-{
-    NSLog(@"Hi");
-    UIView *loginView = [[INLloginView alloc]init];
-    self.view = loginView;
-}
 
-/*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,11 +32,14 @@
         // Custom initialization
     }
     return self;
-}*/
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    //Hide nav bar
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+    
     NSLog(@"Hello");
     // Create gradient background
     
@@ -49,11 +52,51 @@
     
 
 }
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    //Resign keyboard on outside touch
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+- (IBAction)logIn:(id)sender {
+    [PFUser logInWithUsernameInBackground:self.username.text
+                                 password:self.password.text
+                                    block:^(PFUser *user, NSError *error) {
+                                        if (user) {
+                                            NSLog(@"Successfully logged in!");
+                                            INLContactsTableViewController *contactsView = [[INLContactsTableViewController alloc]init];
+                                            [self.navigationController pushViewController:contactsView animated:YES];
+                                        } else {
+                                            NSLog(@"Error logging in: %@", error);
+                                            //Try again message somewhere
+                                        }
+                                    }];
+}
+- (IBAction)toSignUp:(id)sender {
+    INLsignUpViewController *signUp = [[INLsignUpViewController alloc]init];
+    [self.navigationController pushViewController:signUp animated:YES];
+
+}
+
+-(void)dismissKeyboard{
+    [_password resignFirstResponder];
+    [_username resignFirstResponder];
 }
 
 @end

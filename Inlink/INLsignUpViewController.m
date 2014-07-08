@@ -16,8 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UIButton *signUp;
 @property (weak, nonatomic) IBOutlet UIImageView *logo;
-@property (assign, nonatomic) NSString *inputUser;
-@property (assign, nonatomic) NSString *inputPassword;
+@property (weak, nonatomic) IBOutlet UIButton *toLogIn;
 
 
 @end
@@ -49,7 +48,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    //Hide nav bar
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+    
     NSLog(@"Will load Sign Up");
     // Create gradient background
     
@@ -62,11 +64,26 @@
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //Resign keyboard on outside touch
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+
+}
+- (IBAction)toLogIn:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,8 +92,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-//Resign keyboard on outside touch
-
+-(void)dismissKeyboard{
+    [_password resignFirstResponder];
+    [_username resignFirstResponder];
+}
 
 
 

@@ -7,10 +7,14 @@
 //
 
 #import "INLChatViewController.h"
+#import "Parse/Parse.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface INLChatViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (nonatomic) PFUser *user;
+@property (nonatomic) UITextView *message;
 
 @end
 
@@ -21,6 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _user = [PFUser currentUser];
     }
     return self;
 }
@@ -28,13 +33,42 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(backgroundTouched)];
-    
     [self.view addGestureRecognizer:tap];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    NSMutableDictionary *message = _user[@"messagesSent"];
+    NSString *mess = message[_chatPartner[@"name"]];
+    //animations for when a message disappears
+    self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x - self.view.bounds.size.width/4, -100, self.view.bounds.size.width, 50)];
+    [self.view addSubview:self.message];
+    self.message.text = @"http://www.google.com";
+    self.message.userInteractionEnabled = YES;
+    [self.message setDataDetectorTypes:UIDataDetectorTypeLink];
+    self.message.editable = NO;
+    self.message.layer.cornerRadius = 6;
+    self.message.layer.borderColor = [UIColor colorWithRed:192/255.0 green:192/255.0 blue:192/255.0 alpha:1].CGColor;
+    self.message.layer.borderWidth = 2.0;
+    self.message.alpha = 1.0;
+    [self.message sizeToFit];
     
+    [UIView animateWithDuration:2.0 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        self.message.center = CGPointMake(self.view.center.x, self.view.center.y - 10);
+    }
+                     completion:^(BOOL success){
+                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                             self.message.alpha = 0.0;
+                             self.message.center = CGPointMake(self.view.center.x - 25, -100);
+                         });
+                    }];
+    [message removeObjectForKey:mess];
+    _user[@"messageSent"] = message;
+    [_user saveInBackground];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -48,8 +82,6 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-//animations for when a message disappears
 
 //Animations to move up/down view when keyboard appears/disappears
 -(void)moveUp:(NSNotification *)aNotification
@@ -116,6 +148,14 @@
     
     //TODO: send self.textField.text to the chat
     NSLog(@"Sending %@ to the server",self.textField.text);
+    NSString *message = self.textField.text;
+    NSMutableDictionary* messages = _user[@"messagesSent"];
+    messages[self.chatPartner[@"name"]] = message;
+    _user[@"messageSent"] = messages;
+    [_user saveInBackground];
+    NSMutableDictionary *mes = self.chatPartner[@"messagesRec"];
+    mes[_user[@"name"]] = message;
+    [self.chatPartner saveInBackground];
     self.textField.text = @"";
 }
 

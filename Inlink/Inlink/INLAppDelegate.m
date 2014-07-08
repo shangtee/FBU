@@ -8,6 +8,8 @@
 
 #import "INLAppDelegate.h"
 #import <Parse/Parse.h>
+#import "INLloginViewController.h"
+#import "INLsignUpViewController.h"
 
 @implementation INLAppDelegate
 
@@ -21,12 +23,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    //Set root view controller to log in screen
+    INLsignUpViewController *lvc = [[INLsignUpViewController alloc]init];
+    self.window.rootViewController = lvc;
+    
     [self.window makeKeyAndVisible];
-    
 
-    
-    
-    
     
     return YES;
 }

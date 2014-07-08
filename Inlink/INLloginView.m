@@ -7,6 +7,7 @@
 //
 
 #import "INLloginView.h"
+#import <QuartzCore/QuartzCore.h> //Image Framework
 
 @implementation INLloginView
 
@@ -14,7 +15,19 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+
+        UITextField *username = [[UITextField alloc]initWithFrame:CGRectMake(100, 210, 120, 22)];
+        username.text = @"username";
+        username.borderStyle = UITextBorderStyleRoundedRect;
+        username.clearsOnBeginEditing = YES;
+        [self addSubview: username];
+        
+        UITextField *password= [[UITextField alloc]initWithFrame:CGRectMake(100, 240, 120, 22)];
+        password.text = @"password";
+        password.borderStyle = UITextBorderStyleRoundedRect;
+        password.clearsOnBeginEditing = YES;
+        [self addSubview: password];
+        
     }
     return self;
 }

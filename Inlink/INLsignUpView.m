@@ -7,6 +7,7 @@
 //
 
 #import "INLsignUpView.h"
+#import "INLSignUpViewController.h"
 
 @implementation INLsignUpView
 
@@ -14,7 +15,29 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        
+        NSLog(@"Signing up a user");
+        
+        UITextField *username = [[UITextField alloc]initWithFrame:CGRectMake(100, 210, 120, 22)];
+        username.text = @"username";
+        username.borderStyle = UITextBorderStyleRoundedRect;
+        username.clearsOnBeginEditing = YES;
+        [self addSubview: username];
+        
+        UITextField *password= [[UITextField alloc]initWithFrame:CGRectMake(100, 240, 120, 22)];
+        password.text = @"password";
+        password.borderStyle = UITextBorderStyleRoundedRect;
+        password.clearsOnBeginEditing = YES;
+        [self addSubview: password];
+        
+        UIButton *signup = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [signup addTarget: self
+                   action: @selector(signUp:)
+         forControlEvents: UIControlEventTouchUpInside];
+        
+        [signup setTitle:@"Sign Up!" forState:UIControlStateNormal];
+        signup.frame = CGRectMake(100, 270, 120, 25);
+        [self addSubview: signup];
     }
     return self;
 }

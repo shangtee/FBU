@@ -7,6 +7,8 @@
 //
 
 #import "INLContactsTableViewController.h"
+#import "INLContactsTableViewCell.h"
+#import "INLAddFriendsViewController.h"
 
 @interface INLContactsTableViewController ()
 
@@ -32,6 +34,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UINib *nib = [UINib nibWithNibName:@"INLContactsTableViewCell" bundle:nil];
+    
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"INLContactsTableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,29 +50,43 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 #warning Incomplete method implementation.
+    //TODO: get number of contacts of the current user
     // Return the number of rows in the section.
-    return 0;
+    return 5;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    INLContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"INLContactsTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    
+    if (indexPath.row > 3) {
+        cell.LinkLabel.hidden = YES;
+        cell.nameLabel.text = @"Jane Doe";
+        
+    } else {
+        cell.nameLabel.text = @"John Doe";
+    }
     return cell;
 }
-*/
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    INLAddFriendsViewController *advc = [[INLAddFriendsViewController alloc] init];
+    
+    //TODO: change title to name of friend clicked on
+    advc.title = ((INLContactsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]).nameLabel.text;
+    [self.navigationController pushViewController:advc animated:YES];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

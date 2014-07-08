@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface INLContactsTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *LinkLabel;
 
 @end

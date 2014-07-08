@@ -44,7 +44,6 @@
                     </state>
                     <connections>
                         <action selector="logIn:" destination="-1" eventType="touchUpInside" id="Pof-JP-iRO"/>
-                        <action selector="signUp:" destination="-1" eventType="touchUpInside" id="r6H-Qv-Hqt"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XAF-QY-aLu">

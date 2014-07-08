@@ -8,6 +8,7 @@
 
 #import "INLloginViewController.h"
 #import "INLsignUpViewController.h"
+#import "INLContactsTableViewController.h"
 #import <QuartzCore/QuartzCore.h> //Image Framework
 #import <Parse/Parse.h>
 
@@ -79,8 +80,8 @@
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
                                             NSLog(@"Successfully logged in!");
-                                            
-                                            //[self.navigationController pushViewController:chatView animated:YES];
+                                            INLContactsTableViewController *contactsView = [[INLContactsTableViewController alloc]init];
+                                            [self.navigationController pushViewController:contactsView animated:YES];
                                         } else {
                                             NSLog(@"Error logging in: %@", error);
                                             //Try again message somewhere

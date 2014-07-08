@@ -11,6 +11,7 @@
 #import "INLAddFriendsViewController.h"
 #import "Parse/parse.h"
 #import "INLloginViewController.h"
+#import "INLChatViewController.h"
 
 @interface INLContactsTableViewController ()
 
@@ -25,6 +26,12 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        UINavigationItem *navItem = self.navigationItem;
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewFriend:)];
+        
+        //Set this bar button item as the right item in the navigation Item
+        navItem.rightBarButtonItem = bbi;
+
     }
     return self;
 }
@@ -98,11 +105,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    INLAddFriendsViewController *advc = [[INLAddFriendsViewController alloc] init];
+    INLChatViewController *cvc = [[INLChatViewController alloc] init];
     
     //TODO: change title to name of friend clicked on
-    advc.title = ((INLContactsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]).nameLabel.text;
-    [self.navigationController pushViewController:advc animated:YES];
+    cvc.title = ((INLContactsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]).nameLabel.text;
+    //cvc.chatPartner = self.friends[indexPath.row];
+    [self.navigationController pushViewController:cvc animated:YES];
 }
 /*
 // Override to support conditional editing of the table view.
@@ -153,4 +161,9 @@
 }
 */
 
+-(IBAction)addNewFriend:(id)sender
+{
+    INLAddFriendsViewController *afvc = [[INLAddFriendsViewController alloc] initWithUserName:@"Jane"];
+    [self.navigationController pushViewController:afvc animated:YES];
+}
 @end

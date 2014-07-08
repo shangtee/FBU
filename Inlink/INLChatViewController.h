@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Parse/parse.h"
 @interface INLChatViewController : UIViewController
+@property (nonatomic) PFUser *chatPartner;
 
 @end

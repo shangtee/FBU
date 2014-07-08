@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UIButton *signUp;
 @property (weak, nonatomic) IBOutlet UIImageView *logo;
+@property (assign, nonatomic) NSString *inputUser;
+@property (assign, nonatomic) NSString *inputPassword;
+
 
 @end
 

@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "INLloginViewController.m"
-            timestampString = "426531300.030757"
+            filePath = "INLContactsTableViewController.m"
+            timestampString = "426538810.310652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "-addNewFriend:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

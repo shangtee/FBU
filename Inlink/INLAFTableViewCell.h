@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol INLAFProtocol;
+
 @interface INLAFTableViewCell : UITableViewCell
+@property id <INLAFProtocol> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *DisplayedName;
+
+@end
+
+
+@protocol INLAFProtocol <NSObject>
+
+-(void)reload;
 
 @end

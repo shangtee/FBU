@@ -7,6 +7,11 @@
 //
 
 #import "INLAppDelegate.h"
+#import "INLloginViewController.h"
+#import "INLContactsTableViewController.h"
+#import "INLAddFriendsViewController.h"
+#import "INLAcceptFriendshipTableViewController.h"
+#import "INLChatViewController.h"
 #import <Parse/Parse.h>
 
 @implementation INLAppDelegate
@@ -20,6 +25,8 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    INLloginViewController *login = [[INLloginViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     

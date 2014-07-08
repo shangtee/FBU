@@ -12,29 +12,22 @@
 @interface INLAddFriendsViewController ()
 @property IBOutlet UITextField *textF;
 @property (weak, nonatomic) IBOutlet UIButton *sear;
-@property (nonatomic) NSString *userName;
 
 @end
 
 @implementation INLAddFriendsViewController
 
 
--(instancetype)initWithUserName:(NSString *)username{
-    self = [super init];
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self){
         _sear.layer.cornerRadius = 2;
         _sear.layer.borderColor = [UIColor blueColor].CGColor;
-        _userName = username;
     }
-    return self;
-    
+    return self';'
 }
-
-
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//    return [self initWithUserName:@"hi"];
-//}
 
 
 

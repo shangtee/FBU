@@ -32,24 +32,15 @@
     INLloginViewController *login = [[INLloginViewController alloc]init];
     INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     INLChatViewController *cvc = [[INLChatViewController alloc] init];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctvc];
     INLContactsTableViewController *ctvc = [[INLContactsTableViewController alloc] init];
-=======
-=======
->>>>>>> FETCH_HEAD
     //INLChatViewController *cvc = [[INLChatViewController alloc] init];
 
     //Is the user cached?
     PFUser *currentUser = [PFUser currentUser];
     UINavigationController *nav;
-<<<<<<< HEAD
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
     
     if(currentUser){ //If so, skip to first page (contacts)
         nav = [[UINavigationController alloc] initWithRootViewController:ctvc];

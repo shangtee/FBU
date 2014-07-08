@@ -39,6 +39,7 @@
                     <constraint firstItem="iU8-60-YTX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="yAv-MV-MNm"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="LinkLabel" destination="IjM-4x-CLe" id="dAI-PE-5cn"/>
                 <outlet property="nameLabel" destination="iU8-60-YTX" id="eIS-Wf-8LX"/>

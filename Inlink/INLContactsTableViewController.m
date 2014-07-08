@@ -31,6 +31,10 @@
         
         //Set this bar button item as the right item in the navigation Item
         navItem.rightBarButtonItem = bbi;
+        
+
+        self.title = @"Friends";
+
 
     }
     return self;
@@ -100,6 +104,27 @@
     } else {
         cell.nameLabel.text = @"John Doe";
     }
+//    switch (indexPath.row) {
+//        case 0:
+//            cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:1.0];
+//            break;
+//        case 1:
+//            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.4 alpha:1.0];
+//            break;
+//        case 2:
+//            cell.backgroundColor = [UIColor colorWithRed:0.4 green:1.0 blue:0.4 alpha:1.0];
+//            break;
+//        case 3:
+//            cell.backgroundColor = [UIColor colorWithRed:0.4 green:0.4 blue:1.0 alpha:1.0];
+//            break;
+//        case 4:
+//            cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:1.0 alpha:1.0];
+//            break;
+//
+//            
+//        default:
+//            break;
+//    }
     return cell;
 }
 

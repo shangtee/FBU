@@ -8,6 +8,7 @@
 
 #import "INLAddFriendsViewController.h"
 #import "Parse/parse.h"
+#import "INLAcceptFriendshipTableViewController.h"
 
 @interface INLAddFriendsViewController ()
 @property IBOutlet UITextField *textF;
@@ -23,8 +24,13 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self){
+        UINavigationItem *navItem = self.navigationItem;
         _sear.layer.cornerRadius = 2;
+        _sear.layer.borderWidth = 2;
         _sear.layer.borderColor = [UIColor blueColor].CGColor;
+        UIBarButtonItem *frq = [[UIBarButtonItem alloc] initWithTitle:@"Friend Requests" style:UIBarButtonItemStylePlain target:self action:@selector(viewFriendRequests:)];
+        frq.tintColor = [UIColor whiteColor];
+        navItem.rightBarButtonItem = frq;
     }
     return self;
 }
@@ -60,6 +66,7 @@
         [follow setObject:toBeAdded forKey:@"to"];
         [follow setObject:[NSDate date] forKey:@"date"];
         [follow saveInBackground];
+        self.textF.text = @"";
         
         [self.view endEditing:YES];
     }
@@ -78,8 +85,14 @@
 
 }
 
-//Methods dismissing the keyboard
+//view the friend requests
+- (void)viewFriendRequests:(id)sender{
+    INLAcceptFriendshipTableViewController* frRe = [[INLAcceptFriendshipTableViewController alloc]initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:frRe animated:YES];
+}
 
+
+//Methods dismissing the keyboard
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"finished typing %@ to add friends",textField.text);
@@ -109,6 +122,9 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveUp:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveDown:) name:UIKeyboardWillHideNotification object:nil];
+    _sear.layer.cornerRadius = 5;
+    _sear.layer.borderWidth = 1.2;
+    _sear.layer.borderColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:204.0/255.0 alpha:1.0].CGColor;
 }
 
 -(void)viewWillDisappear:(BOOL)animated

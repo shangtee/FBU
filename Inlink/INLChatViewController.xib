@@ -18,8 +18,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWZ-Nu-4Tn">
-                    <rect key="frame" x="20" y="532" width="213" height="30"/>
+                    <rect key="frame" x="20" y="532" width="217" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="225" id="HSA-jZ-MOu"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done"/>
                     <connections>
@@ -27,7 +30,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNX-TH-fVY">
-                    <rect key="frame" x="253" y="532" width="53" height="30"/>
+                    <rect key="frame" x="245" y="532" width="67" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="53" id="09u-07-zRa"/>
@@ -51,11 +54,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="DWZ-Nu-4Tn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="6CS-sh-T0V"/>
-                <constraint firstItem="QNX-TH-fVY" firstAttribute="leading" secondItem="DWZ-Nu-4Tn" secondAttribute="trailing" constant="26" id="clG-8T-ona"/>
-                <constraint firstAttribute="bottom" secondItem="DWZ-Nu-4Tn" secondAttribute="bottom" constant="6" id="qUE-H3-TwO"/>
-                <constraint firstAttribute="bottom" secondItem="QNX-TH-fVY" secondAttribute="bottom" constant="6" id="xdk-s1-l0t"/>
-                <constraint firstAttribute="trailing" secondItem="QNX-TH-fVY" secondAttribute="trailing" constant="24" id="yw8-N0-jKB"/>
+                <constraint firstItem="DWZ-Nu-4Tn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="CZ9-Ez-n6a"/>
+                <constraint firstItem="QNX-TH-fVY" firstAttribute="top" secondItem="DWZ-Nu-4Tn" secondAttribute="top" id="GDr-i9-c8e"/>
+                <constraint firstAttribute="bottom" secondItem="DWZ-Nu-4Tn" secondAttribute="bottom" constant="6" id="GQM-RW-drR"/>
+                <constraint firstAttribute="trailing" secondItem="QNX-TH-fVY" secondAttribute="trailing" constant="8" id="glT-X2-2YI"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

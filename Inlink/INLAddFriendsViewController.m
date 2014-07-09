@@ -35,22 +35,33 @@
     PFQuery *query = [PFUser query];
     NSString *currentString = self.textF.text;
     if (currentString){
-        [query whereKey:@"name" equalTo:currentString];
+        [query whereKey:@"username" equalTo:currentString];
         NSArray* currentStrings = [query findObjects];
-        PFUser* currentString = currentStrings[0];
+        if ([currentStrings count] == 0) {NSLog(@"Error"); return;}
+        PFUser* toBeAdded = currentStrings[0];
         PFUser *currentUser = [PFUser currentUser];
         if (!currentUser){
             NSLog(@"There is an error");
             return;
         }
-        NSMutableArray *friendsRequested = currentUser[@"friendRequests"];
-        [friendsRequested addObject:currentString];
-        currentUser[@"friendRequests"] = friendsRequested;
-        [currentUser saveInBackground];
-        NSMutableArray *friendsReceived = currentString[@"friendsRequestsR"];
-        currentString[@"friendsRequestsR"] = friendsReceived;
-        [friendsReceived addObject:currentUser];
+//        NSMutableArray *friendsRequested = currentUser[@"friendRequested"];
+//        if (!friendsRequested) friendsRequested = [NSMutableArray array];
+//        [friendsRequested addObject:toBeAdded];
+//        currentUser[@"friendRequested"] = friendsRequested;
+//        [currentUser saveInBackground];
+//        NSMutableArray *friendsReceived = toBeAdded[@"friendsRequestedR"];
+//        if (!friendsReceived) friendsReceived = [NSMutableArray array];
+//        toBeAdded[@"friendsRequestedR"] = friendsReceived;
+//        [friendsReceived addObject:currentUser];
+//        [toBeAdded saveInBackground];
         
+        PFObject *follow = [PFObject objectWithClassName:@"Follow"];
+        [follow setObject:[PFUser currentUser]  forKey:@"from"];
+        [follow setObject:toBeAdded forKey:@"to"];
+        [follow setObject:[NSDate date] forKey:@"date"];
+        [follow saveInBackground];
+        
+        [self.view endEditing:YES];
     }
 }
 

@@ -16,7 +16,7 @@
 
 @interface INLContactsTableViewController ()
 
-@property (nonatomic) NSArray *friends;
+@property (nonatomic) NSMutableArray *friends;
 
 @end
 
@@ -79,18 +79,57 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.tableView reloadData];
+    // set up the query on the Follow table
+    PFQuery *query = [PFQuery queryWithClassName:@"Follow"];
+    [query whereKey:@"from" equalTo:[PFUser currentUser]];
+    __block NSMutableArray* friends;
+    // execute the query
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        for(PFObject *o in objects) {
+//            // o is an entry in the Follow table
+//            // to get the user, we get the object with the to key
+//            PFUser *otherUser = [o objectForKey:@"to"];
+//            [friends addObject:otherUser];
+////            NSLog(@"%d", [self.friends count]);
+//        }
+//    }];
+//    self.friends = [friends copy];
+//    NSLog(@"%d", [self.friends count]);
+//
+//    [self.tableView reloadData];
+    self.friends = [NSMutableArray array];
+    friends = [[query findObjects] mutableCopy];
+    
+            for(PFObject *o in friends) {
+                    // o is an entry in the Follow table
+                    // to get the user, we get the object with the to key
+                    PFUser *otherUser = [o objectForKey:@"to"];
+                PFUser *localOtherUser = [otherUser fetchIfNeeded];
+                    [self.friends addObject:localOtherUser];
+                NSLog(@"%@", otherUser);
+        //            NSLog(@"%d", [self.friends count]);
+                }
+    
+
+            NSLog(@"%d", [self.friends count]);
+
+            [self.tableView reloadData];
+
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    PFUser *currentUser = [PFUser currentUser];
-    if (currentUser) {
-        self.friends = currentUser[@"friends"];
-    } else {
-        INLloginViewController *login = [[INLloginViewController alloc] init];
-        [self.navigationController presentViewController:login animated:YES completion:nil];
-    }
+//    PFUser *currentUser = [PFUser currentUser];
+//    if (currentUser) {
+//        self.friends = currentUser[@"friends"];
+//    } else {
+//        INLloginViewController *login = [[INLloginViewController alloc] init];
+//        [self.navigationController presentViewController:login animated:YES completion:nil];
+//    }
+    
+
+
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -108,9 +147,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     //TODO: get number of contacts of the current user
     // Return the number of rows in the section.
+    NSLog(@"%d count", [self.friends count]);
     return [self.friends count];
 }
 
@@ -149,7 +188,7 @@
 //            break;
 //    }
     PFUser *friend = (PFUser *)self.friends[indexPath.row];
-    cell.nameLabel.text = friend.username;
+    cell.nameLabel.text = friend[@"username"];
     return cell;
 }
 

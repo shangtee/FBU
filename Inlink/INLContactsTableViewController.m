@@ -17,6 +17,7 @@
 @interface INLContactsTableViewController ()
 
 @property (nonatomic) NSMutableArray *friends;
+@property (nonatomic) BOOL gotNew;
 
 @end
 
@@ -58,6 +59,8 @@
         [tempImageView setFrame:self.tableView.frame];
         
         self.tableView.backgroundView = tempImageView;
+        
+
 
     }
     return self;
@@ -112,8 +115,18 @@
     
 
             NSLog(@"%d", [self.friends count]);
-
-            [self.tableView reloadData];
+    
+    
+    
+    PFQuery *query1 = [PFQuery queryWithClassName:@"Friends"];
+    [query1 whereKey:@"to" equalTo:[PFUser currentUser]];
+    NSMutableArray *friends2 = [[query1 findObjects]mutableCopy];
+    for(PFObject *o in friends2) {
+        PFUser *otherUser = [o objectForKey:@"from"];
+        PFUser *localOtherUser = [otherUser fetchIfNeeded];
+        [self.friends addObject:localOtherUser];
+    }
+    [self.tableView reloadData];
 
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -125,8 +138,18 @@
 //        INLloginViewController *login = [[INLloginViewController alloc] init];
 //        [self.navigationController presentViewController:login animated:YES completion:nil];
 //    }
+    /*
+    //Test push
+    NSLog(@"Testing pushing");
+    PFQuery *pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"user" equalTo:[PFUser currentUser]];
     
-
+    // Send push notification to query
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:pushQuery]; // Set our Installation query
+    [push setMessage:@"Yo"];
+    [push sendPushInBackground];
+    NSLog(@"End testing"); */
 
 }
 

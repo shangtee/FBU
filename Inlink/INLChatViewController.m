@@ -225,13 +225,28 @@
             self.Mes.text = @"The message has been sent!";
             self.Mes.font = [UIFont fontWithName:@"Helvetica" size:20.0];
             [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
+            
+        //Notify other user
+        NSLog(@"Notifying other user");
+        PFQuery *pushQuery = [PFInstallation query];
+        [pushQuery whereKey:@"user" equalTo:_chatPartner];
+        
+        // Send push notification to query
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:pushQuery]; // Set our Installation query
+        NSString *message = [NSString stringWithFormat:@"%@ sent you a message!", [PFUser currentUser].username];
+        [push setMessage: message];
+        [push sendPushInBackground];
+        
+        [self.view endEditing:YES];
         }
     }
     else{
         [self.view endEditing:YES];
         if (!self.message){
             self.Mes.alpha = 1.0;
-            self.Mes.text = @"Please wait for the last message to be received!";
+
+            self.Mes.text = [NSString stringWithFormat:@"%@ hasn't gotten your last message yet!", _chatPartner.username];
             [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
         }
         

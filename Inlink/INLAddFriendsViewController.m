@@ -13,6 +13,7 @@
 @interface INLAddFriendsViewController ()
 @property IBOutlet UITextField *textF;
 @property (weak, nonatomic) IBOutlet UIButton *sear;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
 @end
 
@@ -67,6 +68,18 @@
         [follow setObject:[NSDate date] forKey:@"date"];
         [follow saveInBackground];
         self.textF.text = @"";
+        
+        //Notify other user
+        NSLog(@"Notifying other user");
+        PFQuery *pushQuery = [PFInstallation query];
+        [pushQuery whereKey:@"user" equalTo:toBeAdded];
+        
+        // Send push notification to query
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:pushQuery]; // Set our Installation query
+        NSString *message = [NSString stringWithFormat:@"%@ has added you to their contacts!", [PFUser currentUser].username];
+        [push setMessage: message];
+        [push sendPushInBackground];
         
         [self.view endEditing:YES];
     }
@@ -155,6 +168,7 @@
     [UIView setAnimationCurve:animationCurve];
     [UIView setAnimationDuration:animationDuration];
     
+    [self.textF setFrame:CGRectMake(self.textF.frame.origin.x, self.textF.frame.origin.y - 60, self.textF.frame.size.width, self.textF.frame.size.height)];
     [self.sear setFrame:CGRectMake(self.sear.frame.origin.x, self.sear.frame.origin.y - 60, self.sear.frame.size.width, self.sear.frame.size.height)];
     [UIView commitAnimations];
 }
@@ -179,6 +193,7 @@
     [UIView setAnimationDuration:animationDuration];
     
     [self.sear setFrame:CGRectMake(self.sear.frame.origin.x, self.sear.frame.origin.y + 60, self.sear.frame.size.width, self.sear.frame.size.height)];
+    [self.textF setFrame:CGRectMake(self.textF.frame.origin.x, self.textF.frame.origin.y + 60, self.textF.frame.size.width, self.textF.frame.size.height)];
     [UIView commitAnimations];
 }
 

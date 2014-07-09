@@ -103,18 +103,11 @@
         PFInstallation *installation = [PFInstallation currentInstallation];
         installation[@"user"] = [PFUser currentUser];
         [installation saveInBackground];
+        
         //Go to contacts page
         INLContactsTableViewController *contactsView = [[INLContactsTableViewController alloc]init];
         [self.navigationController pushViewController:contactsView animated:YES];
         NSLog(@"Pushed contactsView");
-        
-        //Test query
-        PFQuery *pushQuery = [PFInstallation query];
-        [pushQuery whereKey:@"user" equalTo: [PFUser currentUser]];
-        PFPush *push = [[PFPush alloc] init];
-        [push setQuery:pushQuery];
-        [push setMessage:@"Yo"];
-        [push sendPushInBackground];
 
     }
     else{

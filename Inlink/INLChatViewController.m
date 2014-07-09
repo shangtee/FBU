@@ -54,7 +54,7 @@
         PFUser*j =[q fetchIfNeeded];
         if ([j isEqual:self.chatPartner]){
             text = [[o objectForKey:@"url"] fetchIfNeeded];
-            
+            [o deleteInBackground];
             break;
         }
     }

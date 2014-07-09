@@ -58,6 +58,8 @@
         [tempImageView setFrame:self.tableView.frame];
         
         self.tableView.backgroundView = tempImageView;
+        
+
 
     }
     return self;
@@ -125,8 +127,18 @@
 //        INLloginViewController *login = [[INLloginViewController alloc] init];
 //        [self.navigationController presentViewController:login animated:YES completion:nil];
 //    }
+    /*
+    //Test push
+    NSLog(@"Testing pushing");
+    PFQuery *pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"user" equalTo:[PFUser currentUser]];
     
-
+    // Send push notification to query
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:pushQuery]; // Set our Installation query
+    [push setMessage:@"Yo"];
+    [push sendPushInBackground];
+    NSLog(@"End testing"); */
 
 }
 

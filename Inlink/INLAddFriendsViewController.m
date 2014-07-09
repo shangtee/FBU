@@ -61,6 +61,18 @@
         [follow setObject:[NSDate date] forKey:@"date"];
         [follow saveInBackground];
         
+        //Notify other user
+        NSLog(@"Notifying other user");
+        PFQuery *pushQuery = [PFInstallation query];
+        [pushQuery whereKey:@"user" equalTo:toBeAdded];
+        
+        // Send push notification to query
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:pushQuery]; // Set our Installation query
+        NSString *message = [NSString stringWithFormat:@"%@ has added you to their contacts!", [PFUser currentUser].username];
+        [push setMessage: message];
+        [push sendPushInBackground];
+        
         [self.view endEditing:YES];
     }
 }

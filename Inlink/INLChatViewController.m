@@ -16,7 +16,8 @@
 @property (nonatomic) PFUser *user;
 @property (nonatomic) UITextView *message;
 @property (weak, nonatomic) IBOutlet UITextView *Mes;
-
+@property (nonatomic, copy) NSDictionary *jsonObject;
+@property (nonatomic) BOOL safeWeb;
 @end
 
 @implementation INLChatViewController
@@ -51,8 +52,8 @@
     NSMutableArray *people = [[query findObjects]mutableCopy];
     NSString *text;
     for (PFObject *o in people){
-        PFUser*q = [o objectForKey:@"from"];
-        PFUser*j =[q fetchIfNeeded];
+        PFUser* q = [o objectForKey:@"from"];
+        PFUser* j =[q fetchIfNeeded];
         NSLog(@"%@, %@", j, self.chatPartner);
         NSString *i1 = [o objectForKey:@"senderName"];
         NSString *i2 = [self.chatPartner objectForKey:@"username"];
@@ -193,8 +194,8 @@
     NSMutableArray *people = [[query findObjects]mutableCopy];
     BOOL present = NO;
     for (PFObject *o in people){
-        PFUser*q = [o objectForKey:@"to"];
-        PFUser*j =[q fetchIfNeeded];
+        PFUser* q = [o objectForKey:@"to"];
+        PFUser* j =[q fetchIfNeeded];
         NSLog(@"%@, %@", j, self.chatPartner);
         NSString *i1 = [o objectForKey:@"receiverName"];
         NSString *i2 = [self.chatPartner objectForKey:@"username"];
@@ -204,6 +205,11 @@
         }
     }
     if (!present){
+        NSString *link;
+        if ([self.textField.text characterAtIndex:[self.textField.text length] - 1] != '/') link = [self.textField.text stringByAppendingString:@"/"]; else link = [NSString stringWithString:self.textField.text];
+        [self validateURL:link];
+        if (!self.safeWeb) {NSLog(@"bad URL"); return;}
+        return;
         PFObject *message = [PFObject objectWithClassName:@"Messages"];
         [message setObject:_user forKey:@"from"];
         [message setObject:[_user objectForKey:@"username"] forKey:@"senderName"];
@@ -225,13 +231,52 @@
         [self.view endEditing:YES];
         if (!self.message){
             self.Mes.alpha = 1.0;
-            self.Mes.text = @"Please wait for the first message to be received!";
+            self.Mes.text = @"Please wait for the last message to be received!";
             [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
         }
         
     }
 }
 
+
+-(void)validateURL:(NSString *)host
+{
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:nil];
+    NSString *requestString = [NSString stringWithFormat:@"http://api.mywot.com/0.4/public_link_json2?hosts=%@&key=89f86712a5f21b66452d39a116b4383141252c2f", host];
+    NSURL *url = [NSURL URLWithString:requestString];
+    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        self.jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+        NSLog(@"%@",self.jsonObject);
+        if ([self.jsonObject count] != 1) {
+            self.safeWeb = NO;
+            return;
+        }
+        NSArray *allValues = [self.jsonObject allValues];
+        NSDictionary *firstValue = allValues[0];
+        if (firstValue[@"0"] && firstValue[@"0"][0] <= 40) {
+            self.safeWeb = NO;
+            return;
+        }
+        NSLog(@"passed trustworthieness");
+        if (firstValue[@"4"] && firstValue[@"4"][0] <= 40) {
+            self.safeWeb = NO;
+            return;
+        }
+        self.safeWeb = YES;
+        dispatch_semaphore_signal(sema);
+    }];
+    
+    [dataTask resume];
+    while (dispatch_semaphore_wait(sema, 10000)) {
+        
+    }
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

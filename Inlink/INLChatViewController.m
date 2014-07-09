@@ -45,21 +45,33 @@
 //    NSMutableDictionary *message = _user[@"messagesSent"];
 //    NSString *mess = message[_chatPartner[@"username"]];
     //animations for when a message disappears
-    self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x - self.view.bounds.size.width/4, -100, self.view.bounds.size.width, 50)];
-    [self.view addSubview:self.message];
-    self.message.text = @"http://www.google.com";
-    self.message.userInteractionEnabled = YES;
-    [self.message setDataDetectorTypes:UIDataDetectorTypeLink];
-    self.message.editable = NO;
-    self.message.layer.cornerRadius = 6;
-    self.message.layer.borderColor = [UIColor colorWithRed:192/255.0 green:192/255.0 blue:192/255.0 alpha:1].CGColor;
-    self.message.layer.borderWidth = 2.0;
-    self.message.alpha = 1.0;
-    [self.message sizeToFit];
-    
-    [UIView animateWithDuration:2.0 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.message.center = CGPointMake(self.view.center.x, self.view.center.y - 10);
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    [query whereKey:@"to" equalTo:[PFUser currentUser]];
+    NSMutableArray *people = [[query findObjects]mutableCopy];
+    NSString *text;
+    for (PFObject *o in people){
+        PFUser*q = [o objectForKey:@"from"];
+        PFUser*j =[q fetchIfNeeded];
+        if ([j isEqual:self.chatPartner]){
+            text = [[o objectForKey:@"url"] fetchIfNeeded];
+        }
     }
+    if (text){
+        self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x - self.view.bounds.size.width/4, -100, self.view.bounds.size.width, 50)];
+        [self.view addSubview:self.message];
+        self.message.text = text;
+        self.message.userInteractionEnabled = YES;
+        [self.message setDataDetectorTypes:UIDataDetectorTypeLink];
+        self.message.editable = NO;
+        self.message.layer.cornerRadius = 6;
+        self.message.layer.borderColor = [UIColor colorWithRed:192/255.0 green:192/255.0 blue:192/255.0 alpha:1].CGColor;
+        self.message.layer.borderWidth = 2.0;
+        self.message.alpha = 1.0;
+        [self.message sizeToFit];
+    
+        [UIView animateWithDuration:2.0 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        self.message.center = CGPointMake(self.view.center.x, self.view.center.y - 10);
+        }
                      completion:^(BOOL success){
                          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                              self.message.alpha = 0.0;
@@ -69,9 +81,11 @@
 //    [message removeObjectForKey:mess];
 //    _user[@"messagesSent"] = message;
 //    [_user saveInBackground];
+    }
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    self.textField.text = @"http://";
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveUp:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveDown:) name:UIKeyboardWillHideNotification object:nil];
@@ -156,7 +170,14 @@
 //    NSMutableDictionary *mes = self.chatPartner[@"messagesRec"];
 //    mes[_user[@"username"]] = message;
 //    [self.chatPartner saveInBackground];
-    self.textField.text = @"";
+    PFObject *message = [PFObject objectWithClassName:@"Messages"];
+    [message setObject:_user forKey:@"from"];
+    [message setObject:_chatPartner forKey:@"to"];
+    [message setObject:self.textField.text forKey:@"url"];
+    [message saveInBackground];
+    
+    [self.view endEditing:YES];
+    self.textField.text = @"http://";
 }
 
 - (void)didReceiveMemoryWarning

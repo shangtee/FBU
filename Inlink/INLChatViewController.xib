@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="INLChatViewController">
             <connections>
+                <outlet property="sendButton" destination="QNX-TH-fVY" id="Jf0-KD-OWM"/>
                 <outlet property="textField" destination="DWZ-Nu-4Tn" id="ta0-OH-RIU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

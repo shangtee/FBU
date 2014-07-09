@@ -66,8 +66,11 @@
         }
     }
     if (text){
-        //String regular expression to see if URL links to an image (jpg, gif, or png)
-        
+        //See if URL links to an image (jpg, gif, or png)
+        NSString *fileExt = [text pathExtension];
+        if ([fileExt isEqualToString:@"jpg"]){
+            NSLog(@"Hey this is an image!");
+        }
         self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x - self.view.bounds.size.width/4, -100, self.view.bounds.size.width, 50)];
         [self.view addSubview:self.message];
         self.message.text = text;

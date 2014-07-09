@@ -17,7 +17,6 @@
 @interface INLContactsTableViewController ()
 
 @property (nonatomic) NSMutableArray *friends;
-@property (nonatomic) BOOL gotNew;
 
 @end
 
@@ -58,10 +57,19 @@
         
         self.tableView.backgroundView = tempImageView;
         
-
+        // Keep a listener for NEW
+        //[self addObserver: self forKeyPath:@"gotNew" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                  //context:nil];
+        
 
     }
     return self;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath
+ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self.view setNeedsDisplay];
 }
 
 - (void)viewDidLoad
@@ -222,6 +230,9 @@
     if (count > 0){
         NSLog(@"There are messages!");
         cell.LinkLabel.text = @"NEW";
+    }
+    else{
+        cell.LinkLabel.text = @"";
     }
     
     return cell;

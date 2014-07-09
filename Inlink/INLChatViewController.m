@@ -47,23 +47,27 @@
 //    NSMutableDictionary *message = _user[@"messagesSent"];
 //    NSString *mess = message[_chatPartner[@"username"]];
     //animations for when a message disappears
-    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"]; //set up query
     [query whereKey:@"to" equalTo:[PFUser currentUser]];
-    NSMutableArray *people = [[query findObjects]mutableCopy];
+    NSMutableArray *people = [[query findObjects]mutableCopy]; //create array of objects from query
+    
     NSString *text;
-    for (PFObject *o in people){
-        PFUser* q = [o objectForKey:@"from"];
-        PFUser* j =[q fetchIfNeeded];
-        NSLog(@"%@, %@", j, self.chatPartner);
-        NSString *i1 = [o objectForKey:@"senderName"];
-        NSString *i2 = [self.chatPartner objectForKey:@"username"];
-        if ([i1 isEqualToString:i2]){
-            text = [o objectForKey:@"url"];
-            [o deleteInBackground];
+    for (PFObject *message in people){ //For message
+        PFUser* fromQuery = [message objectForKey:@"from"];
+        PFUser* fromUser =[fromQuery fetchIfNeeded];
+        
+        NSString *senderName = [message objectForKey:@"senderName"];
+        NSString *partnerName = [self.chatPartner objectForKey:@"username"];
+        if ([senderName isEqualToString:partnerName]){
+            text = [message objectForKey:@"url"]; //get the URL message
+            [message deleteInBackground]; //delete from PARSE
             break;
         }
     }
     if (text){
+        //String regular expression to see if URL links to an image (jpg, gif, or png)
+        
         self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x - self.view.bounds.size.width/4, -100, self.view.bounds.size.width, 50)];
         [self.view addSubview:self.message];
         self.message.text = text;

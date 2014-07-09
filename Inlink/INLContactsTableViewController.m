@@ -29,8 +29,6 @@
     if (self) {
         // Custom initialization
         UINavigationItem *navItem = self.navigationItem;
-
-        //UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewFriend:)];
         
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add70_small"] style: UIBarButtonItemStylePlain target:self action:@selector(addNewFriend:)];
         
@@ -212,6 +210,7 @@
 //    }
     PFUser *friend = (PFUser *)self.friends[indexPath.row];
     cell.nameLabel.text = friend[@"username"];
+    
     return cell;
 }
 

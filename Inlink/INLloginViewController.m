@@ -88,6 +88,7 @@
 
 
 - (IBAction)logIn:(id)sender {
+    [self dismissKeyboard];
     [PFUser logInWithUsernameInBackground:self.username.text
                                  password:self.password.text
                                     block:^(PFUser *user, NSError *error) {
@@ -113,7 +114,6 @@
 }
 
 -(void)dismissKeyboard {
-    [self.view endEditing:YES];
     [_password resignFirstResponder];
     [_username resignFirstResponder];
 }

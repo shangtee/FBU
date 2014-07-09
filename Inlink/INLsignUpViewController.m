@@ -35,6 +35,7 @@
 }
 
 - (IBAction)signUp:(id)sender {
+    [self dismissKeyboard];
     PFUser *user = [PFUser user];
     user.username = self.username.text;
     user.password = self.password.text;

@@ -224,7 +224,7 @@
         
     NSLog(@"Push message");
     PFQuery *pushQuery = [PFInstallation query];
-    [pushQuery whereKey:@"user" equalTo:_chatPartner];
+    [pushQuery whereKey:@"user" equalTo: [PFUser currentUser]];
     
     // Send push notification to query
     PFPush *push = [[PFPush alloc] init];

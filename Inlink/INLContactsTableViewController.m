@@ -168,7 +168,7 @@ ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 //        INLloginViewController *login = [[INLloginViewController alloc] init];
 //        [self.navigationController presentViewController:login animated:YES completion:nil];
 //    }
-    /*
+    
     //Test push
     NSLog(@"Testing pushing");
     PFQuery *pushQuery = [PFInstallation query];
@@ -179,7 +179,7 @@ ofObject:(id)object change:(NSDictionary *)change context:(void *)context
     [push setQuery:pushQuery]; // Set our Installation query
     [push setMessage:@"Yo"];
     [push sendPushInBackground];
-    NSLog(@"End testing"); */
+    NSLog(@"End testing");
 
 }
 

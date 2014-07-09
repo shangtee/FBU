@@ -57,13 +57,15 @@
         
         self.tableView.backgroundView = tempImageView;
         
-        // Keep a listener for NEW
-        //[self addObserver: self forKeyPath:@"gotNew" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-                  //context:nil];
+        //Add an observer for push notification
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:@"reload" object:nil];
         
-
     }
     return self;
+}
+
+-(void)reload: (NSNotification *)notification{
+    [self.view setNeedsDisplay];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath

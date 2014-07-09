@@ -112,10 +112,21 @@
 
 }
 
--(void)dismissKeyboard{
+-(void)dismissKeyboard {
     [self.view endEditing:YES];
     [_password resignFirstResponder];
     [_username resignFirstResponder];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.username) {
+        [textField resignFirstResponder];
+        [self.password becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+        [self logIn:nil];
+    }
+    return YES;
+}
 @end

@@ -29,6 +29,8 @@
 		130CA2C2196B891200ECD902 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130CA2BB196B891200ECD902 /* Security.framework */; };
 		130CA2C3196B891200ECD902 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130CA2BC196B891200ECD902 /* StoreKit.framework */; };
 		130CA2C4196B891200ECD902 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130CA2BD196B891200ECD902 /* SystemConfiguration.framework */; };
+		8A0DC093196CBA1300023605 /* inLinkLogoGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A0DC092196CBA1300023605 /* inLinkLogoGrey.png */; };
+		8A0DC09B196CC12E00023605 /* add70_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A0DC09A196CC12E00023605 /* add70_small.png */; };
 		8A57A80E196C72FA0049FB01 /* INLsignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A57A80D196C72FA0049FB01 /* INLsignUpViewController.xib */; };
 		8A57A813196C8A6B0049FB01 /* InLink.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A57A812196C8A6B0049FB01 /* InLink.png */; };
 		8A57A815196C90F70049FB01 /* INLloginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A57A814196C90F70049FB01 /* INLloginViewController.xib */; };
@@ -83,6 +85,8 @@
 		130CA2BB196B891200ECD902 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		130CA2BC196B891200ECD902 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		130CA2BD196B891200ECD902 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8A0DC092196CBA1300023605 /* inLinkLogoGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inLinkLogoGrey.png; sourceTree = "<group>"; };
+		8A0DC09A196CC12E00023605 /* add70_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add70_small.png; sourceTree = "<group>"; };
 		8A57A80D196C72FA0049FB01 /* INLsignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INLsignUpViewController.xib; sourceTree = "<group>"; };
 		8A57A812196C8A6B0049FB01 /* InLink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InLink.png; sourceTree = "<group>"; };
 		8A57A814196C90F70049FB01 /* INLloginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INLloginViewController.xib; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 		8A57A80F196C889F0049FB01 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8A0DC092196CBA1300023605 /* inLinkLogoGrey.png */,
+				8A0DC09A196CC12E00023605 /* add70_small.png */,
 				8A57A812196C8A6B0049FB01 /* InLink.png */,
 			);
 			name = Images;
@@ -331,7 +337,9 @@
 			files = (
 				C365F2AB196C4CD0002EBC4C /* INLChatViewController.xib in Resources */,
 				130CA28D196B885700ECD902 /* InfoPlist.strings in Resources */,
+				8A0DC093196CBA1300023605 /* inLinkLogoGrey.png in Resources */,
 				8A57A813196C8A6B0049FB01 /* InLink.png in Resources */,
+				8A0DC09B196CC12E00023605 /* add70_small.png in Resources */,
 				C365F2B8196C4D60002EBC4C /* INLAFTableViewCell.xib in Resources */,
 				130CA295196B885700ECD902 /* Images.xcassets in Resources */,
 				C365F2B0196C4CEE002EBC4C /* INLAddFriendsViewController.xib in Resources */,

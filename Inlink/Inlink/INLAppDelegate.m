@@ -42,11 +42,9 @@
     
     //Change tint of nav bar
     [[UINavigationBar appearance] setBarTintColor: [UIColor colorWithRed:0.278 green:0.859 blue:1 alpha:1]];
-
     
     return YES;
 }
-
 
 //For Push Notifications
 - (void)application:(UIApplication *)application

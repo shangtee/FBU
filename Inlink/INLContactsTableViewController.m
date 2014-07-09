@@ -58,12 +58,23 @@
         
         self.tableView.backgroundView = tempImageView;
         
+        UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
+        
+        refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+        
+        [refreshControl addTarget:self action:@selector(updateTable) forControlEvents:UIControlEventValueChanged];
+        self.refreshControl = refreshControl;
 
 
     }
     return self;
 }
 
+-(void)updateTable
+{
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -222,6 +233,8 @@
     if (count > 0){
         NSLog(@"There are messages!");
         cell.LinkLabel.text = @"NEW";
+    } else {
+        cell.LinkLabel.text = @"";
     }
     
     return cell;

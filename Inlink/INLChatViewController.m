@@ -17,7 +17,6 @@
 @property (nonatomic) UITextView *message;
 @property (weak, nonatomic) IBOutlet UITextView *Mes;
 @property (nonatomic, copy) NSDictionary *jsonObject;
-@property (nonatomic) BOOL safeWeb;
 @property (weak, nonatomic) IBOutlet UILabel *invalidUrlLabel;
 
 @end
@@ -264,7 +263,7 @@
         self.invalidUrlLabel.text = @"Message sent";
         self.invalidUrlLabel.hidden = NO;
         self.invalidUrlLabel.alpha = 1.0;
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:2 animations:^{
             self.invalidUrlLabel.alpha = 0.0;
         } completion:^(BOOL finished) {
             self.invalidUrlLabel.hidden = YES;
@@ -286,7 +285,6 @@
         self.jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
         NSLog(@"%@",self.jsonObject);
         if ([self.jsonObject count] != 1) {
-            self.safeWeb = NO;
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 self.invalidUrlLabel.text = @"This is not a website";
                 self.invalidUrlLabel.hidden = NO;
@@ -295,8 +293,14 @@
         }
         NSArray *allValues = [self.jsonObject allValues];
         NSDictionary *firstValue = allValues[0];
+        if ((!firstValue[@"0"] && !firstValue[@"4"])) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                self.invalidUrlLabel.text = @"This is not a website";
+                self.invalidUrlLabel.hidden = NO;
+            }];
+            return;
+        }
         if (firstValue[@"0"] && firstValue[@"0"][0] <= 40) {
-            self.safeWeb = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.invalidUrlLabel.text = @"This website is not safe";
                 self.invalidUrlLabel.hidden = NO;
@@ -305,14 +309,12 @@
         }
         NSLog(@"passed trustworthieness");
         if (firstValue[@"4"] && firstValue[@"4"][0] <= 40) {
-            self.safeWeb = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.invalidUrlLabel.text = @"This website is not safe";
                 self.invalidUrlLabel.hidden = NO;
             });
             return;
         }
-        self.safeWeb = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.invalidUrlLabel.hidden = YES;
             [self updateServer];

@@ -299,7 +299,7 @@
             }];
             return;
         }
-        if (firstValue[@"0"] && firstValue[@"0"][0] <= 40) {
+        if (firstValue[@"0"] && [(NSNumber *)firstValue[@"0"][0] intValue] <= 40) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.invalidUrlLabel.text = @"This website is not safe";
                 self.invalidUrlLabel.hidden = NO;
@@ -307,7 +307,7 @@
             return;
         }
         NSLog(@"passed trustworthieness");
-        if (firstValue[@"4"] && firstValue[@"4"][0] <= 40) {
+        if (firstValue[@"4"] && [(NSNumber *)firstValue[@"4"][0] intValue] <= 40) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.invalidUrlLabel.text = @"This website is not safe";
                 self.invalidUrlLabel.hidden = NO;

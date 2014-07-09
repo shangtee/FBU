@@ -192,14 +192,6 @@
     
     //TODO: send self.textField.text to the chat
     NSLog(@"Sending %@ to the server",self.textField.text);
-//    NSString *message = self.textField.text;
-//    NSMutableDictionary* messages = _user[@"messagesSent"];
-//    messages[self.chatPartner[@"name"]] = message;
-//    _user[@"messageSent"] = messages;
-//    [_user saveInBackground];
-//    NSMutableDictionary *mes = self.chatPartner[@"messagesRec"];
-//    mes[_user[@"username"]] = message;
-//    [self.chatPartner saveInBackground];
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"from" equalTo:[PFUser currentUser]];
     NSMutableArray *people = [[query findObjects]mutableCopy];
@@ -230,6 +222,15 @@
             
         }
         
+    NSLog(@"Push message");
+    PFQuery *pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"user" equalTo:_chatPartner];
+    
+    // Send push notification to query
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:pushQuery]; // Set our Installation query
+    [push setMessage:@"You got a link!"];
+    [push sendPushInBackground];
 
 
 }

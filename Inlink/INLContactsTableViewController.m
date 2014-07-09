@@ -17,7 +17,6 @@
 @interface INLContactsTableViewController ()
 
 @property (nonatomic) NSMutableArray *friends;
-@property (nonatomic) BOOL gotNew;
 
 @end
 
@@ -58,6 +57,7 @@
         
         self.tableView.backgroundView = tempImageView;
         
+
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
         
         refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
@@ -66,15 +66,30 @@
         self.refreshControl = refreshControl;
 
 
+        // Keep a listener for NEW
+        //[self addObserver: self forKeyPath:@"gotNew" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                  //context:nil];
+        
+
+
     }
     return self;
 }
+
 
 -(void)updateTable
 {
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
 }
+
+-(void)observeValueForKeyPath:(NSString *)keyPath
+ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self.view setNeedsDisplay];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -234,6 +249,9 @@
         NSLog(@"There are messages!");
         cell.LinkLabel.text = @"NEW";
     } else {
+        cell.LinkLabel.text = @"";
+    }
+    else{
         cell.LinkLabel.text = @"";
     }
     

@@ -231,7 +231,6 @@
     [push setQuery:pushQuery]; // Set our Installation query
     [push setMessage:@"You got a link!"];
     [push sendPushInBackground];
-    NSLog(@"Finished pushing!");
 
 
 }

@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *Mes;
 @property (nonatomic, copy) NSDictionary *jsonObject;
 @property (weak, nonatomic) IBOutlet UILabel *invalidUrlLabel;
-
+@property (nonatomic) UITextView *noMessage;
 @end
 
 @implementation INLChatViewController
@@ -72,7 +72,7 @@
         if ([fileExt isEqualToString:@"jpg"]){
             NSLog(@"Hey this is an image!");
         }
-        self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x - self.view.bounds.size.width/4, -100, self.view.bounds.size.width, 50)];
+        self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x, -100, self.view.bounds.size.width, 50)];
         [self.view addSubview:self.message];
         self.message.text = text;
         self.message.userInteractionEnabled = YES;
@@ -86,7 +86,7 @@
         [self.message sizeToFit];
     
         [UIView animateWithDuration:2.0 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.message.center = CGPointMake(self.view.center.x, self.view.center.y - 10);
+        self.message.center = CGPointMake(self.view.center.x, self.view.center.y);
         }
                      completion:^(BOOL success){
                          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -97,6 +97,18 @@
 //    [message removeObjectForKey:mess];
 //    _user[@"messagesSent"] = message;
 //    [_user saveInBackground];
+    } else {
+        self.noMessage = [[UITextView alloc] init];
+        
+        
+        self.noMessage.text = @"You have no new messages";
+        self.noMessage.textColor = [UIColor colorWithRed:127/255.0 green:127/255.0 blue:127/255.0 alpha:1.0];
+        self.noMessage.userInteractionEnabled = NO;
+        self.noMessage.editable = NO;
+        self.noMessage.font = [UIFont fontWithName:@"Helvetica" size:14];
+        [self.noMessage sizeToFit];
+        self.noMessage.center = CGPointMake(self.view.center.x, self.view.center.y - 10);
+        [self.view addSubview:self.noMessage];
     }
 }
 
@@ -130,15 +142,16 @@
     [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
 
     [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
-    CGRect messageFrame = self.message.frame;
-    messageFrame.origin.y += keyboardFrame.size.height / 2;
+    CGRect messageFrame;
+    if (self.message) {messageFrame = self.message.frame;
+        messageFrame.origin.y += keyboardFrame.size.height / 2;}
     //animate
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:animationCurve];
     [UIView setAnimationDuration:animationDuration];
     
     [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - keyboardFrame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
-    [self.message setFrame:messageFrame];
+    if (self.message) [self.message setFrame:messageFrame];
 
     [UIView commitAnimations];
 }
@@ -156,15 +169,16 @@
     
 
     [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
-    CGRect messageFrame = self.message.frame;
-    messageFrame.origin.y -= keyboardFrame.size.height / 2;
+    CGRect messageFrame;
+    if (self.message) {messageFrame = self.message.frame;
+        messageFrame.origin.y -= keyboardFrame.size.height / 2;}
     //animate
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:animationCurve];
     [UIView setAnimationDuration:animationDuration];
     
     [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + keyboardFrame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
-    [self.message setFrame:messageFrame];
+    if (self.message) [self.message setFrame:messageFrame];
     [UIView commitAnimations];
 }
 

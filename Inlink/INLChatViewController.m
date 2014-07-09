@@ -150,7 +150,7 @@
     NSLog(@"Sending %@ to the server",self.textField.text);
     NSString *message = self.textField.text;
     NSMutableDictionary* messages = _user[@"messagesSent"];
-    messages[self.chatPartner[@"name"]] = message;
+    messages[self.chatPartner[@"username"]] = message;
     _user[@"messageSent"] = messages;
     [_user saveInBackground];
     NSMutableDictionary *mes = self.chatPartner[@"messagesRec"];

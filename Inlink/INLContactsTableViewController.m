@@ -57,9 +57,24 @@
         
         self.tableView.backgroundView = tempImageView;
         
+
         //Add an observer for push notification
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:@"reload" object:nil];
         
+
+        UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
+        
+        refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+        
+        [refreshControl addTarget:self action:@selector(updateTable) forControlEvents:UIControlEventValueChanged];
+        self.refreshControl = refreshControl;
+
+
+        // Keep a listener for NEW
+        //[self addObserver: self forKeyPath:@"gotNew" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                  //context:nil];
+        
+
     }
     return self;
 }
@@ -68,11 +83,18 @@
     [self.view setNeedsDisplay];
 }
 
+-(void)updateTable
+{
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+}
+
 -(void)observeValueForKeyPath:(NSString *)keyPath
 ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     [self.view setNeedsDisplay];
 }
+
 
 - (void)viewDidLoad
 {
@@ -232,8 +254,7 @@ ofObject:(id)object change:(NSDictionary *)change context:(void *)context
     if (count > 0){
         NSLog(@"There are messages!");
         cell.LinkLabel.text = @"NEW";
-    }
-    else{
+    } else {
         cell.LinkLabel.text = @"";
     }
     

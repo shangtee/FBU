@@ -43,7 +43,6 @@
         NSLog(@"%@, %@", i1, i2);
         if ([i1 isEqualToString:i2]){
             [o delete];
-            [self.delegate reload];
         }
     }
     

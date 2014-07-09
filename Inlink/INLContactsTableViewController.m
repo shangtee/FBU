@@ -58,6 +58,10 @@
         self.tableView.backgroundView = tempImageView;
         
 
+        //Add an observer for push notification
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:@"reload" object:nil];
+        
+
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
         
         refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
@@ -71,11 +75,13 @@
                   //context:nil];
         
 
-
     }
     return self;
 }
 
+-(void)reload: (NSNotification *)notification{
+    [self.view setNeedsDisplay];
+}
 
 -(void)updateTable
 {

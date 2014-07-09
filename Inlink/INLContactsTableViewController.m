@@ -211,6 +211,19 @@
     PFUser *friend = (PFUser *)self.friends[indexPath.row];
     cell.nameLabel.text = friend[@"username"];
     
+    //Toggle NEW
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    [query whereKey:@"to" equalTo:[PFUser currentUser]];
+    [query whereKey:@"from" equalTo:friend];
+    NSMutableArray *people = [[query findObjects] mutableCopy];
+    NSUInteger count = [people count];
+    NSLog(@"The count is:%lu", count);
+    
+    if (count > 0){
+        NSLog(@"There are messages!");
+        cell.LinkLabel.text = @"NEW";
+    }
+    
     return cell;
 }
 

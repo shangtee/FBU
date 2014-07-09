@@ -251,9 +251,6 @@ ofObject:(id)object change:(NSDictionary *)change context:(void *)context
     } else {
         cell.LinkLabel.text = @"";
     }
-    else{
-        cell.LinkLabel.text = @"";
-    }
     
     return cell;
 }

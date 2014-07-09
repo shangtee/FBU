@@ -16,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWZ-Nu-4Tn">
-                    <rect key="frame" x="20" y="532" width="214" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWZ-Nu-4Tn">
+                    <rect key="frame" x="20" y="532" width="213" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done"/>
@@ -25,11 +25,11 @@
                         <outlet property="delegate" destination="-1" id="pFb-PC-3Ct"/>
                     </connections>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNX-TH-fVY">
-                    <rect key="frame" x="260" y="532" width="36" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNX-TH-fVY">
+                    <rect key="frame" x="253" y="532" width="53" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="36" id="09u-07-zRa"/>
+                        <constraint firstAttribute="width" constant="53" id="09u-07-zRa"/>
                         <constraint firstAttribute="height" constant="30" id="TyM-ZM-6sb"/>
                     </constraints>
                     <state key="normal" title="Send">

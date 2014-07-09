@@ -35,18 +35,18 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Follow"];
     [query whereKey:@"to" equalTo:[PFUser currentUser]];
     NSMutableArray* people = [[query findObjects] mutableCopy];
+    NSMutableArray* cool = [NSMutableArray array];
     for (PFObject *o in people){
         PFUser*j = [o objectForKey:@"from"];
         PFUser *q = [j fetchIfNeeded];
         NSString *i1 = q[@"username"];
         NSString *i2 = self.fri[@"username"];
-        NSLog(@"%@, %@", i1, i2);
-        if ([i1 isEqualToString:i2]){
-            [o delete];
+        if (![i1 isEqualToString:i2]){
+            [cool addObject:o];
         }
     }
     
-    [self.delegate reload];
+    [self.delegate reload:cool];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -29,7 +29,8 @@
     return self;
 }
 
--(void)reload{
+-(void)reload:(NSMutableArray*)people{
+    self.people = people;
     [self.tableView reloadData];
 }
 

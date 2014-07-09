@@ -166,7 +166,6 @@
 //Methods dismissing the keyboard
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"finished typing %@",textField.text);
     [textField resignFirstResponder];
     
     return YES;
@@ -201,7 +200,6 @@
     for (PFObject *o in people){
         PFUser* q = [o objectForKey:@"to"];
         PFUser* j =[q fetchIfNeeded];
-        NSLog(@"%@, %@", j, self.chatPartner);
         NSString *i1 = [o objectForKey:@"receiverName"];
         NSString *i2 = [self.chatPartner objectForKey:@"username"];
         if ([i1 isEqualToString:i2]){
@@ -247,7 +245,6 @@
         [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
         
         //Notify other user
-        NSLog(@"Notifying other user");
         PFQuery *pushQuery = [PFInstallation query];
         [pushQuery whereKey:@"user" equalTo:_chatPartner];
         
@@ -283,7 +280,6 @@
     
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         self.jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        NSLog(@"%@",self.jsonObject);
         if ([self.jsonObject count] != 1) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 self.invalidUrlLabel.text = @"This is not a website";

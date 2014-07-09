@@ -12,7 +12,7 @@
 #import <QuartzCore/QuartzCore.h> //Image Framework
 #import <Parse/Parse.h>
 
-@interface INLloginViewController ()
+@interface INLloginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *logo;
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
@@ -79,13 +79,11 @@
     
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 - (IBAction)logIn:(id)sender {
@@ -108,10 +106,10 @@
     [self.navigationController pushViewController:signUp animated:YES];
 
 }
-
--(void)dismissKeyboard{
-    [_password resignFirstResponder];
-    [_username resignFirstResponder];
-}
+//
+//-(void)dismissKeyboard{
+//    [_password resignFirstResponder];
+//    [_username resignFirstResponder];
+//}
 
 @end

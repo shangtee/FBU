@@ -25,14 +25,28 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        PFQuery *query = [PFUser query];
-        _user = [PFUser currentUser];
-        _friendsRequest = _user[@"friendsRequestsR"];
     }
     return self;
 }
 
 -(void)reload{
+    [self.tableView reloadData];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    PFQuery *query = [PFQuery queryWithClassName:@"Follow"];
+    [query whereKey:@"to" equalTo:[PFUser currentUser]];
+    _user = [PFUser currentUser];
+    NSMutableArray *people = [[query findObjects] mutableCopy];
+    if (!self.friendsRequest){
+        self.friendsRequest = [NSMutableArray array];
+    }
+    for (PFObject* o in people){
+        PFUser *q = [o objectForKey:@"from"];
+        PFUser *j = [o fetchIfNeeded];
+        [self.friendsRequest addObject:j];
+    }
+    NSLog(@"%@", self.friendsRequest);
     [self.tableView reloadData];
 }
 
@@ -78,7 +92,8 @@
 {
     INLAFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"INLATableViewCell" forIndexPath:indexPath];
     PFUser *user = _friendsRequest[indexPath.row];
-    NSString *name = user[@"name"];
+    NSString *name = [user objectForKey:@"username"];
+    cell.fri = user;
     cell.DisplayedName.text = name;
     return cell;
 }

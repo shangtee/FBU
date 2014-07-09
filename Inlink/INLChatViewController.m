@@ -69,6 +69,7 @@
         self.message.userInteractionEnabled = YES;
         [self.message setDataDetectorTypes:UIDataDetectorTypeLink];
         self.message.editable = NO;
+        self.message.font = [UIFont fontWithName:@"Helvetica" size:20];
         self.message.layer.cornerRadius = 6;
         self.message.layer.borderColor = [UIColor colorWithRed:192/255.0 green:192/255.0 blue:192/255.0 alpha:1].CGColor;
         self.message.layer.borderWidth = 2.0;
@@ -164,6 +165,13 @@
     
     return YES;
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqual: @" "]) return NO;
+    return YES;
+}
+
 - (IBAction)backgroundTouched {
     [self.view endEditing:YES];
 }

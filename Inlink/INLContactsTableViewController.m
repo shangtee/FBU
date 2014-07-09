@@ -82,7 +82,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     // set up the query on the Follow table
-    PFQuery *query = [PFQuery queryWithClassName:@"Follow"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Friends"];
     [query whereKey:@"from" equalTo:[PFUser currentUser]];
     __block NSMutableArray* friends;
     // execute the query

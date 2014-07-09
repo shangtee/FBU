@@ -106,10 +106,11 @@
     [self.navigationController pushViewController:signUp animated:YES];
 
 }
-//
-//-(void)dismissKeyboard{
-//    [_password resignFirstResponder];
-//    [_username resignFirstResponder];
-//}
+
+-(void)dismissKeyboard{
+    [self.view endEditing:YES];
+    [_password resignFirstResponder];
+    [_username resignFirstResponder];
+}
 
 @end

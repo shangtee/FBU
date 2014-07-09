@@ -17,7 +17,6 @@
 @property (nonatomic) UITextView *message;
 @property (weak, nonatomic) IBOutlet UITextView *Mes;
 @property (nonatomic, copy) NSDictionary *jsonObject;
-@property (nonatomic) BOOL safeWeb;
 @property (weak, nonatomic) IBOutlet UILabel *invalidUrlLabel;
 
 @end
@@ -170,7 +169,6 @@
 //Methods dismissing the keyboard
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"finished typing %@",textField.text);
     [textField resignFirstResponder];
     
     return YES;
@@ -205,7 +203,6 @@
     for (PFObject *o in people){
         PFUser* q = [o objectForKey:@"to"];
         PFUser* j =[q fetchIfNeeded];
-        NSLog(@"%@, %@", j, self.chatPartner);
         NSString *i1 = [o objectForKey:@"receiverName"];
         NSString *i2 = [self.chatPartner objectForKey:@"username"];
         if ([i1 isEqualToString:i2]){
@@ -251,7 +248,6 @@
         [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
         
         //Notify other user
-        NSLog(@"Notifying other user");
         PFQuery *pushQuery = [PFInstallation query];
         [pushQuery whereKey:@"user" equalTo:_chatPartner];
         
@@ -267,7 +263,7 @@
         self.invalidUrlLabel.text = @"Message sent";
         self.invalidUrlLabel.hidden = NO;
         self.invalidUrlLabel.alpha = 1.0;
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:2 animations:^{
             self.invalidUrlLabel.alpha = 0.0;
         } completion:^(BOOL finished) {
             self.invalidUrlLabel.hidden = YES;
@@ -287,9 +283,7 @@
     
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         self.jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        NSLog(@"%@",self.jsonObject);
         if ([self.jsonObject count] != 1) {
-            self.safeWeb = NO;
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 self.invalidUrlLabel.text = @"This is not a website";
                 self.invalidUrlLabel.hidden = NO;
@@ -298,8 +292,14 @@
         }
         NSArray *allValues = [self.jsonObject allValues];
         NSDictionary *firstValue = allValues[0];
+        if ((!firstValue[@"0"] && !firstValue[@"4"])) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                self.invalidUrlLabel.text = @"This is not a website";
+                self.invalidUrlLabel.hidden = NO;
+            }];
+            return;
+        }
         if (firstValue[@"0"] && firstValue[@"0"][0] <= 40) {
-            self.safeWeb = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.invalidUrlLabel.text = @"This website is not safe";
                 self.invalidUrlLabel.hidden = NO;
@@ -308,14 +308,12 @@
         }
         NSLog(@"passed trustworthieness");
         if (firstValue[@"4"] && firstValue[@"4"][0] <= 40) {
-            self.safeWeb = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.invalidUrlLabel.text = @"This website is not safe";
                 self.invalidUrlLabel.hidden = NO;
             });
             return;
         }
-        self.safeWeb = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.invalidUrlLabel.hidden = YES;
             [self updateServer];

@@ -23,6 +23,6 @@
 
 @protocol INLAFProtocol <NSObject>
 
--(void)reload;
+-(void)reload: (NSMutableArray *)people;
 
 @end

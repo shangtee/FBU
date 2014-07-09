@@ -164,6 +164,13 @@
     
     return YES;
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqual: @" "]) return NO;
+    return YES;
+}
+
 - (IBAction)backgroundTouched {
     [self.view endEditing:YES];
 }

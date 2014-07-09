@@ -164,6 +164,7 @@ ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 //    }
     
     //Test push
+    /*
     NSLog(@"Testing pushing");
     PFQuery *pushQuery = [PFInstallation query];
     [pushQuery whereKey:@"user" equalTo:[PFUser currentUser]];
@@ -173,7 +174,7 @@ ofObject:(id)object change:(NSDictionary *)change context:(void *)context
     [push setQuery:pushQuery]; // Set our Installation query
     [push setMessage:@"Yo"];
     [push sendPushInBackground];
-    NSLog(@"End testing");
+    NSLog(@"End testing"); */
 
 }
 

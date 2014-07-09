@@ -52,8 +52,11 @@
     for (PFObject *o in people){
         PFUser*q = [o objectForKey:@"from"];
         PFUser*j =[q fetchIfNeeded];
-        if ([j isEqual:self.chatPartner]){
-            text = [[o objectForKey:@"url"] fetchIfNeeded];
+        NSLog(@"%@, %@", j, self.chatPartner);
+        NSString *i1 = [o objectForKey:@"senderName"];
+        NSString *i2 = [self.chatPartner objectForKey:@"username"];
+        if ([i1 isEqualToString:i2]){
+            text = [o objectForKey:@"url"];
             [o deleteInBackground];
             break;
         }
@@ -177,7 +180,9 @@
 //    [self.chatPartner saveInBackground];
     PFObject *message = [PFObject objectWithClassName:@"Messages"];
     [message setObject:_user forKey:@"from"];
+    [message setObject:[_user objectForKey:@"username"] forKey:@"senderName"];
     [message setObject:_chatPartner forKey:@"to"];
+    [message setObject:[_chatPartner objectForKey:@"username"] forKey:@"receiverName"];
     [message setObject:self.textField.text forKey:@"url"];
     [message saveInBackground];
     

@@ -58,10 +58,6 @@
         self.tableView.backgroundView = tempImageView;
         
 
-        //Add an observer for push notification
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:@"reload" object:nil];
-        
-
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
         
         refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
@@ -75,13 +71,11 @@
                   //context:nil];
         
 
+
     }
     return self;
 }
 
--(void)reload: (NSNotification *)notification{
-    [self.view setNeedsDisplay];
-}
 
 -(void)updateTable
 {
@@ -168,7 +162,7 @@ ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 //        INLloginViewController *login = [[INLloginViewController alloc] init];
 //        [self.navigationController presentViewController:login animated:YES completion:nil];
 //    }
-    /*
+    
     //Test push
     NSLog(@"Testing pushing");
     PFQuery *pushQuery = [PFInstallation query];
@@ -179,7 +173,7 @@ ofObject:(id)object change:(NSDictionary *)change context:(void *)context
     [push setQuery:pushQuery]; // Set our Installation query
     [push setMessage:@"Yo"];
     [push sendPushInBackground];
-    NSLog(@"End testing"); */
+    NSLog(@"End testing");
 
 }
 

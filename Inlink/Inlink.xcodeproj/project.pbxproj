@@ -308,11 +308,7 @@
 				ORGANIZATIONNAME = Inlink;
 				TargetAttributes = {
 					130CA27E196B885700ECD902 = {
-<<<<<<< HEAD
 						DevelopmentTeam = T56CX8A493;
-=======
-						DevelopmentTeam = 28GU5W3B7V;
->>>>>>> FETCH_HEAD
 					};
 					130CA299196B885700ECD902 = {
 						TestTargetID = 130CA27E196B885700ECD902;

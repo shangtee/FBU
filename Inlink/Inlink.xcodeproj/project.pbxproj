@@ -308,7 +308,7 @@
 				ORGANIZATIONNAME = Inlink;
 				TargetAttributes = {
 					130CA27E196B885700ECD902 = {
-						DevelopmentTeam = T56CX8A493;
+						DevelopmentTeam = S979T5734D;
 					};
 					130CA299196B885700ECD902 = {
 						TestTargetID = 130CA27E196B885700ECD902;
@@ -507,7 +507,7 @@
 				GCC_PREFIX_HEADER = "Inlink/Inlink-Prefix.pch";
 				INFOPLIST_FILE = "Inlink/Inlink-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "90EDDEC2-29FD-47F0-8071-DC217B6539F3";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -528,7 +528,7 @@
 				GCC_PREFIX_HEADER = "Inlink/Inlink-Prefix.pch";
 				INFOPLIST_FILE = "Inlink/Inlink-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "90EDDEC2-29FD-47F0-8071-DC217B6539F3";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

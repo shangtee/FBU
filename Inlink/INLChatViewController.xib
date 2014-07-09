@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="INLChatViewController">
             <connections>
                 <outlet property="Mes" destination="3B6-R5-2x0" id="2dY-jd-yBu"/>
+                <outlet property="invalidUrlLabel" destination="yRB-B7-3T8" id="eBs-Or-UGg"/>
                 <outlet property="sendButton" destination="QNX-TH-fVY" id="Jf0-KD-OWM"/>
                 <outlet property="textField" destination="DWZ-Nu-4Tn" id="ta0-OH-RIU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -51,13 +52,22 @@
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRB-B7-3T8">
+                    <rect key="frame" x="20" y="507" width="36" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="DWZ-Nu-4Tn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="CZ9-Ez-n6a"/>
                 <constraint firstItem="QNX-TH-fVY" firstAttribute="top" secondItem="DWZ-Nu-4Tn" secondAttribute="top" id="GDr-i9-c8e"/>
                 <constraint firstAttribute="bottom" secondItem="DWZ-Nu-4Tn" secondAttribute="bottom" constant="6" id="GQM-RW-drR"/>
+                <constraint firstItem="DWZ-Nu-4Tn" firstAttribute="top" secondItem="yRB-B7-3T8" secondAttribute="bottom" constant="8" id="fL7-I5-2C5"/>
                 <constraint firstAttribute="trailing" secondItem="QNX-TH-fVY" secondAttribute="trailing" constant="8" id="glT-X2-2YI"/>
+                <constraint firstItem="yRB-B7-3T8" firstAttribute="leading" secondItem="DWZ-Nu-4Tn" secondAttribute="leading" id="y7r-Uw-ejz"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

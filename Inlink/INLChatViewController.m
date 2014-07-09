@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *Mes;
 @property (nonatomic, copy) NSDictionary *jsonObject;
 @property (nonatomic) BOOL safeWeb;
+@property (weak, nonatomic) IBOutlet UILabel *invalidUrlLabel;
+
 @end
 
 @implementation INLChatViewController
@@ -215,24 +217,39 @@
         NSString *link;
         if ([self.textField.text characterAtIndex:[self.textField.text length] - 1] != '/') link = [self.textField.text stringByAppendingString:@"/"]; else link = [NSString stringWithString:self.textField.text];
         [self validateURL:link];
-        if (!self.safeWeb) {NSLog(@"bad URL"); return;}
-        return;
-        PFObject *message = [PFObject objectWithClassName:@"Messages"];
-        [message setObject:_user forKey:@"from"];
-        [message setObject:[_user objectForKey:@"username"] forKey:@"senderName"];
-        [message setObject:_chatPartner forKey:@"to"];
-        [message setObject:[_chatPartner objectForKey:@"username"] forKey:@"receiverName"];
-        [message setObject:self.textField.text forKey:@"url"];
-        [message saveInBackground];
-    
-        [self.view endEditing:YES];
-        self.textField.text = @"http://";
-        if (!self.message){
-            self.Mes.alpha = 1.0;
-            self.Mes.text = @"The message has been sent!";
-            self.Mes.font = [UIFont fontWithName:@"Helvetica" size:20.0];
-            [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
+        
+    }else{
+            [self.view endEditing:YES];
+            if (!self.message){
+                self.Mes.alpha = 1.0;
+                
+                self.Mes.text = [NSString stringWithFormat:@"%@ hasn't gotten your last message yet!", _chatPartner.username];
+                [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
+            }
             
+        }
+        
+
+
+}
+-(void)updateServer
+{
+    PFObject *message = [PFObject objectWithClassName:@"Messages"];
+    [message setObject:_user forKey:@"from"];
+    [message setObject:[_user objectForKey:@"username"] forKey:@"senderName"];
+    [message setObject:_chatPartner forKey:@"to"];
+    [message setObject:[_chatPartner objectForKey:@"username"] forKey:@"receiverName"];
+    [message setObject:self.textField.text forKey:@"url"];
+    [message saveInBackground];
+    
+    [self.view endEditing:YES];
+    self.textField.text = @"http://";
+    if (!self.message){
+        self.Mes.alpha = 1.0;
+        self.Mes.text = @"The message has been sent!";
+        self.Mes.font = [UIFont fontWithName:@"Helvetica" size:20.0];
+        [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
+        
         //Notify other user
         NSLog(@"Notifying other user");
         PFQuery *pushQuery = [PFInstallation query];
@@ -246,25 +263,22 @@
         [push sendPushInBackground];
         
         [self.view endEditing:YES];
-        }
-    }
-    else{
-        [self.view endEditing:YES];
-        if (!self.message){
-            self.Mes.alpha = 1.0;
-
-            self.Mes.text = [NSString stringWithFormat:@"%@ hasn't gotten your last message yet!", _chatPartner.username];
-            [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
-        }
+    } else {
+        self.invalidUrlLabel.text = @"Message sent";
+        self.invalidUrlLabel.hidden = NO;
+        self.invalidUrlLabel.alpha = 1.0;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.invalidUrlLabel.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            self.invalidUrlLabel.hidden = YES;
+            self.invalidUrlLabel.alpha = 1.0;
+        }];
         
     }
 }
 
-
 -(void)validateURL:(NSString *)host
 {
-    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-    
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:nil];
     NSString *requestString = [NSString stringWithFormat:@"http://api.mywot.com/0.4/public_link_json2?hosts=%@&key=89f86712a5f21b66452d39a116b4383141252c2f", host];
@@ -276,27 +290,39 @@
         NSLog(@"%@",self.jsonObject);
         if ([self.jsonObject count] != 1) {
             self.safeWeb = NO;
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                self.invalidUrlLabel.text = @"This is not a website";
+                self.invalidUrlLabel.hidden = NO;
+            }];
             return;
         }
         NSArray *allValues = [self.jsonObject allValues];
         NSDictionary *firstValue = allValues[0];
         if (firstValue[@"0"] && firstValue[@"0"][0] <= 40) {
             self.safeWeb = NO;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.invalidUrlLabel.text = @"This website is not safe";
+                self.invalidUrlLabel.hidden = NO;
+            });
             return;
         }
         NSLog(@"passed trustworthieness");
         if (firstValue[@"4"] && firstValue[@"4"][0] <= 40) {
             self.safeWeb = NO;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.invalidUrlLabel.text = @"This website is not safe";
+                self.invalidUrlLabel.hidden = NO;
+            });
             return;
         }
         self.safeWeb = YES;
-        dispatch_semaphore_signal(sema);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.invalidUrlLabel.hidden = YES;
+            [self updateServer];
+        });
     }];
     
     [dataTask resume];
-    while (dispatch_semaphore_wait(sema, 10000)) {
-        
-    }
     
 }
 - (void)didReceiveMemoryWarning

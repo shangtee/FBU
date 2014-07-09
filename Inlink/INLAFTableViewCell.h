@@ -16,6 +16,7 @@
 @property id <INLAFProtocol> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *DisplayedName;
 @property (nonatomic) PFUser *fri;
+@property (weak, nonatomic) IBOutlet UIButton *button;
 
 @end
 

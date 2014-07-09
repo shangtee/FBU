@@ -115,8 +115,18 @@
     
 
             NSLog(@"%d", [self.friends count]);
-
-            [self.tableView reloadData];
+    
+    
+    
+    PFQuery *query1 = [PFQuery queryWithClassName:@"Friends"];
+    [query1 whereKey:@"to" equalTo:[PFUser currentUser]];
+    NSMutableArray *friends2 = [[query1 findObjects]mutableCopy];
+    for(PFObject *o in friends2) {
+        PFUser *otherUser = [o objectForKey:@"from"];
+        PFUser *localOtherUser = [otherUser fetchIfNeeded];
+        [self.friends addObject:localOtherUser];
+    }
+    [self.tableView reloadData];
 
 }
 -(void)viewDidAppear:(BOOL)animated

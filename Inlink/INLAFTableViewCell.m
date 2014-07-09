@@ -11,7 +11,6 @@
 
 @interface INLAFTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UIButton *friends;
 
 @end
 
@@ -32,6 +31,21 @@
         [friend setObject:[NSDate date] forKey:@"date"];
         [friend saveInBackground];
     }
+    PFQuery *query = [PFQuery queryWithClassName:@"Follow"];
+    [query whereKey:@"to" equalTo:[PFUser currentUser]];
+    NSMutableArray* people = [[query findObjects] mutableCopy];
+    for (PFObject *o in people){
+        PFUser*j = [o objectForKey:@"from"];
+        PFUser *q = [j fetchIfNeeded];
+        NSString *i1 = q[@"username"];
+        NSString *i2 = self.fri[@"username"];
+        NSLog(@"%@, %@", i1, i2);
+        if ([i1 isEqualToString:i2]){
+            [o delete];
+            [self.delegate reload];
+        }
+    }
+    
     [self.delegate reload];
 }
 

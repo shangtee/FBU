@@ -43,7 +43,7 @@
     }
     for (PFObject* o in people){
         PFUser *q = [o objectForKey:@"from"];
-        PFUser *j = [o fetchIfNeeded];
+        PFUser *j = (PFUser *)[q fetchIfNeeded];
         [self.friendsRequest addObject:j];
     }
     NSLog(@"%@", self.friendsRequest);
@@ -75,14 +75,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [_friendsRequest count];
 }
@@ -92,9 +90,10 @@
 {
     INLAFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"INLATableViewCell" forIndexPath:indexPath];
     PFUser *user = _friendsRequest[indexPath.row];
-    NSString *name = [user objectForKey:@"username"];
+    NSString *name = user[@"username"];
     cell.fri = user;
     cell.DisplayedName.text = name;
+    cell.button.center = CGPointMake(cell.button.center.x, cell.button.center.y + 20);
     return cell;
 }
 

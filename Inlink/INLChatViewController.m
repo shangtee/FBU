@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (nonatomic) PFUser *user;
 @property (nonatomic) UITextView *message;
+@property (weak, nonatomic) IBOutlet UITextView *Mes;
 
 @end
 
@@ -90,6 +91,7 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    self.Mes.alpha = 0.0;
     self.textField.text = @"http://";
     self.sendButton.layer.cornerRadius = 6;
     self.sendButton.layer.borderWidth = 1;
@@ -204,9 +206,20 @@
     
         [self.view endEditing:YES];
         self.textField.text = @"http://";
+        if (!self.message){
+            self.Mes.alpha = 1.0;
+            self.Mes.text = @"The message has been sent!";
+            self.Mes.font = [UIFont fontWithName:@"Helvetica" size:20.0];
+            [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
+        }
     }
     else{
         [self.view endEditing:YES];
+        if (!self.message){
+            self.Mes.alpha = 1.0;
+            self.Mes.text = @"Please wait for the first message to be received!";
+            [UIView animateWithDuration:3.5 animations:^{self.Mes.alpha = 0.0;} completion:NULL];
+        }
         
     }
 }

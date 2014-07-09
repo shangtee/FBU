@@ -25,6 +25,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.tableView.rowHeight = 68;
     }
     return self;
 }

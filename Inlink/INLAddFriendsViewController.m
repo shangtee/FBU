@@ -75,23 +75,42 @@
                 break;
             }
          }
+        BOOL aF = NO;
+        PFQuery *query1 = [PFQuery queryWithClassName:@"Friends"];
+        [query1 whereKey:@"from" equalTo:[PFUser currentUser]];
+        NSMutableArray *people1 = [[query1 findObjects]mutableCopy];
+        for (PFObject *o in people1){
+            PFUser *q = [o objectForKey:@"to"];
+            PFUser *j = [q fetchIfNeeded];
+            NSString *i1 = [j objectForKey:@"username"];
+            NSString *i2 = [toBeAdded objectForKey:@"username"];
+            if ([i1 isEqualToString:i2]){
+                aF = YES;
+                break;
+            }
+        }
+        
         if (!present){
-            PFObject *follow = [PFObject objectWithClassName:@"Follow"];
-            [follow setObject:[PFUser currentUser]  forKey:@"from"];
-            [follow setObject:toBeAdded forKey:@"to"];
-            [follow setObject:[NSDate date] forKey:@"date"];
-            [follow saveInBackground];
-            self.textF.text = @"";
+            if (!aF){
+                PFObject *follow = [PFObject objectWithClassName:@"Follow"];
+                [follow setObject:[PFUser currentUser]  forKey:@"from"];
+                [follow setObject:toBeAdded forKey:@"to"];
+                [follow setObject:[NSDate date] forKey:@"date"];
+                [follow saveInBackground];
+                self.textF.text = @"";
         
             //Notify other user
-            NSLog(@"Notifying other user");
-            PFQuery *pushQuery = [PFInstallation query];
-            [pushQuery whereKey:@"user" equalTo:toBeAdded];
-            PFPush *push = [[PFPush alloc] init];
-            [push setQuery:pushQuery]; // Set our Installation query
-            NSString *message = [NSString stringWithFormat:@"%@ has added you to their contacts!", [PFUser currentUser].username];
-            [push setMessage: message];
-            [push sendPushInBackground];
+               NSLog(@"Notifying other user");
+               PFQuery *pushQuery = [PFInstallation query];
+             [pushQuery whereKey:@"user" equalTo:toBeAdded];
+             PFPush *push = [[PFPush alloc] init];
+             [push setQuery:pushQuery]; // Set our Installation query
+             NSString *message = [NSString stringWithFormat:@"%@ has added you to their contacts!", [PFUser currentUser].username];
+             [push setMessage: message];
+             [push sendPushInBackground];
+            }else{
+                self.textF.text = @"Already Friends";
+            }
         }
         else{
             self.textF.text = @"Friend Request Sent";

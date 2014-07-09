@@ -73,7 +73,7 @@
             NSLog(@"Hey this is an image!");
         }
         self.message = [[UITextView alloc] initWithFrame:CGRectMake(self.view.center.x, -100, self.view.bounds.size.width, 50)];
-        [self.view addSubview:self.message];
+        
         self.message.text = text;
         self.message.userInteractionEnabled = YES;
         [self.message setDataDetectorTypes:UIDataDetectorTypeLink];
@@ -84,7 +84,10 @@
         self.message.layer.borderWidth = 2.0;
         self.message.alpha = 1.0;
         [self.message sizeToFit];
-    
+        self.message.center = CGPointMake(self.view.center.x, -100);
+        [self.view addSubview:self.message];
+        
+        
         [UIView animateWithDuration:2.0 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.message.center = CGPointMake(self.view.center.x, self.view.center.y);
         }
@@ -282,7 +285,7 @@
         self.invalidUrlLabel.text = @"Message sent";
         self.invalidUrlLabel.hidden = NO;
         self.invalidUrlLabel.alpha = 1.0;
-        [UIView animateWithDuration:2 animations:^{
+        [UIView animateWithDuration:5 animations:^{
             self.invalidUrlLabel.alpha = 0.0;
         } completion:^(BOOL finished) {
             self.invalidUrlLabel.hidden = YES;

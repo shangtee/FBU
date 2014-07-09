@@ -94,7 +94,20 @@
                      completion:^(BOOL success){
                          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                              self.message.alpha = 0.0;
-                             self.message.center = CGPointMake(self.view.center.x - 25, -100);
+                             //self.message.center = CGPointMake(self.view.center.x - 25, -100);
+                             self.message = nil;
+                             
+                             self.noMessage = [[UITextView alloc] init];
+                             
+                             
+                             self.noMessage.text = @"You have no new messages";
+                             self.noMessage.textColor = [UIColor colorWithRed:127/255.0 green:127/255.0 blue:127/255.0 alpha:1.0];
+                             self.noMessage.userInteractionEnabled = NO;
+                             self.noMessage.editable = NO;
+                             self.noMessage.font = [UIFont fontWithName:@"Helvetica" size:14];
+                             [self.noMessage sizeToFit];
+                             self.noMessage.center = CGPointMake(self.view.center.x, self.view.center.y - 10);
+                             [self.view addSubview:self.noMessage];
                          });
                     }];
 //    [message removeObjectForKey:mess];
@@ -148,6 +161,9 @@
     CGRect messageFrame;
     if (self.message) {messageFrame = self.message.frame;
         messageFrame.origin.y += keyboardFrame.size.height / 2;}
+    CGRect noMessageFrame;
+    if (self.noMessage) {noMessageFrame = self.noMessage.frame;
+        noMessageFrame.origin.y += keyboardFrame.size.height / 2;}
     //animate
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:animationCurve];
@@ -155,7 +171,8 @@
     
     [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - keyboardFrame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
     if (self.message) [self.message setFrame:messageFrame];
-
+    if (self.noMessage) [self.noMessage setFrame:noMessageFrame];
+    
     [UIView commitAnimations];
 }
 
@@ -175,6 +192,9 @@
     CGRect messageFrame;
     if (self.message) {messageFrame = self.message.frame;
         messageFrame.origin.y -= keyboardFrame.size.height / 2;}
+    CGRect noMessageFrame;
+    if (self.noMessage) {noMessageFrame = self.noMessage.frame;
+        noMessageFrame.origin.y -= keyboardFrame.size.height / 2;}
     //animate
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:animationCurve];
@@ -182,6 +202,7 @@
     
     [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + keyboardFrame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
     if (self.message) [self.message setFrame:messageFrame];
+    if (self.noMessage) [self.noMessage setFrame:noMessageFrame];
     [UIView commitAnimations];
 }
 

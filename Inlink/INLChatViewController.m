@@ -129,15 +129,17 @@
     [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
     [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
 
-    //TODO: alter the function when orientation changes
     [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
-    
+    CGRect messageFrame = self.message.frame;
+    messageFrame.origin.y += keyboardFrame.size.height / 2;
     //animate
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:animationCurve];
     [UIView setAnimationDuration:animationDuration];
     
     [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - keyboardFrame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.message setFrame:messageFrame];
+
     [UIView commitAnimations];
 }
 
@@ -152,15 +154,17 @@
     [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
     [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
     
-    //TODO: alter the function when orientation changes
+
     [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
-    
+    CGRect messageFrame = self.message.frame;
+    messageFrame.origin.y -= keyboardFrame.size.height / 2;
     //animate
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:animationCurve];
     [UIView setAnimationDuration:animationDuration];
     
     [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + keyboardFrame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.message setFrame:messageFrame];
     [UIView commitAnimations];
 }
 

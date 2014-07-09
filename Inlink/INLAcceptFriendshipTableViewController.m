@@ -25,6 +25,19 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        PFQuery *query = [PFQuery queryWithClassName:@"Follow"];
+        [query whereKey:@"to" equalTo:[PFUser currentUser]];
+        _user = [PFUser currentUser];
+        NSMutableArray *people = [[query findObjects] mutableCopy];
+        if (!self.friendsRequest){
+            self.friendsRequest = [NSMutableArray array];
+        }
+        for (PFObject* o in people){
+            PFUser *q = [o objectForKey:@"from"];
+            PFUser *j = (PFUser *)[q fetchIfNeeded];
+            [self.friendsRequest addObject:j];
+        }
+        NSLog(@"%@", self.friendsRequest);
     }
     return self;
 }

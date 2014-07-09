@@ -178,16 +178,37 @@
 //    NSMutableDictionary *mes = self.chatPartner[@"messagesRec"];
 //    mes[_user[@"username"]] = message;
 //    [self.chatPartner saveInBackground];
-    PFObject *message = [PFObject objectWithClassName:@"Messages"];
-    [message setObject:_user forKey:@"from"];
-    [message setObject:[_user objectForKey:@"username"] forKey:@"senderName"];
-    [message setObject:_chatPartner forKey:@"to"];
-    [message setObject:[_chatPartner objectForKey:@"username"] forKey:@"receiverName"];
-    [message setObject:self.textField.text forKey:@"url"];
-    [message saveInBackground];
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    [query whereKey:@"from" equalTo:[PFUser currentUser]];
+    NSMutableArray *people = [[query findObjects]mutableCopy];
+    BOOL present = NO;
+    for (PFObject *o in people){
+        PFUser*q = [o objectForKey:@"to"];
+        PFUser*j =[q fetchIfNeeded];
+        NSLog(@"%@, %@", j, self.chatPartner);
+        NSString *i1 = [o objectForKey:@"receiverName"];
+        NSString *i2 = [self.chatPartner objectForKey:@"username"];
+        if ([i1 isEqualToString:i2]){
+            present = YES;
+            break;
+        }
+    }
+    if (!present){
+        PFObject *message = [PFObject objectWithClassName:@"Messages"];
+        [message setObject:_user forKey:@"from"];
+        [message setObject:[_user objectForKey:@"username"] forKey:@"senderName"];
+        [message setObject:_chatPartner forKey:@"to"];
+        [message setObject:[_chatPartner objectForKey:@"username"] forKey:@"receiverName"];
+        [message setObject:self.textField.text forKey:@"url"];
+        [message saveInBackground];
     
-    [self.view endEditing:YES];
-    self.textField.text = @"http://";
+        [self.view endEditing:YES];
+        self.textField.text = @"http://";
+    }
+    else{
+        [self.view endEditing:YES];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning

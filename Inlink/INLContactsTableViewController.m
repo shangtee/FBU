@@ -17,6 +17,7 @@
 @interface INLContactsTableViewController ()
 
 @property (nonatomic) NSMutableArray *friends;
+@property (nonatomic) BOOL gotNew;
 
 @end
 

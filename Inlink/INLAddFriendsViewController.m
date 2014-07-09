@@ -13,6 +13,7 @@
 @interface INLAddFriendsViewController ()
 @property IBOutlet UITextField *textF;
 @property (weak, nonatomic) IBOutlet UIButton *sear;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
 @end
 
@@ -167,6 +168,7 @@
     [UIView setAnimationCurve:animationCurve];
     [UIView setAnimationDuration:animationDuration];
     
+    [self.textF setFrame:CGRectMake(self.textF.frame.origin.x, self.textF.frame.origin.y - 60, self.textF.frame.size.width, self.textF.frame.size.height)];
     [self.sear setFrame:CGRectMake(self.sear.frame.origin.x, self.sear.frame.origin.y - 60, self.sear.frame.size.width, self.sear.frame.size.height)];
     [UIView commitAnimations];
 }
@@ -191,6 +193,7 @@
     [UIView setAnimationDuration:animationDuration];
     
     [self.sear setFrame:CGRectMake(self.sear.frame.origin.x, self.sear.frame.origin.y + 60, self.sear.frame.size.width, self.sear.frame.size.height)];
+    [self.textF setFrame:CGRectMake(self.textF.frame.origin.x, self.textF.frame.origin.y + 60, self.textF.frame.size.width, self.textF.frame.size.height)];
     [UIView commitAnimations];
 }
 
